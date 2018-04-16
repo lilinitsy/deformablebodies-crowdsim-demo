@@ -11,7 +11,10 @@ public class Crowd : MonoBehaviour
 	// Use this for initialization
 	void Start() 
     {
-		
+        foreach(Transform child in transform)
+        {
+            Debug.Log(child.transform.position);
+        }
 	}
 	
 	// Update is called once per frame
