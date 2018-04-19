@@ -20,6 +20,7 @@ public class GraphNode : MonoBehaviour
 {
     public List<GraphNode> neighbours;
     public List<float> costs;
+    public Vector3 position;
     public float heuristic;
     public float g;
     public float rhs;
@@ -28,7 +29,7 @@ public class GraphNode : MonoBehaviour
 
     public GraphNode()
     {
-        transform.position = new Vector3(0, 0, 0);
+        position = new Vector3(0, 0, 0);
         heuristic = 1.0f;
         g = Mathf.Infinity;
         rhs = Mathf.Infinity;
@@ -40,7 +41,7 @@ public class GraphNode : MonoBehaviour
 
     public GraphNode(Vector3 p, float h)
     {
-        transform.position = p;
+        position = p;
         heuristic = h;
         g = Mathf.Infinity;
         rhs = Mathf.Infinity;
@@ -50,6 +51,18 @@ public class GraphNode : MonoBehaviour
         is_goal = false;
     }
 
+    void Start()
+    {
+        transform.position = position;
+    }
+
+	// Update is called once per frame
+	// not sure I need this
+    void Update() 
+    {
+		
+	}
+    
     public void calculate_key()
     {
         key = new Vector2(
@@ -65,18 +78,6 @@ public class GraphNode : MonoBehaviour
         Debug.Log("\trhs: " + rhs);
         Debug.Log("\tKey: " + key.ToString("F8"));
     }
-
-	// Use this for initialization
-    // not sure I need this
-	void Start() 
-    {
-		
-	}
 	
-	// Update is called once per frame
-	// not sure I need this
-    void Update() 
-    {
-		
-	}
+
 }
