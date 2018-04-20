@@ -24,6 +24,10 @@ public class GraphNode : MonoBehaviour
     public float heuristic;
     public float g;
     public float rhs;
+
+    // key.x is the first value
+    // key.y is the second
+    // this gets around Unity's lack of Tuples.
     public Vector2 key;
     public bool is_goal;
 
@@ -75,9 +79,7 @@ public class GraphNode : MonoBehaviour
         Debug.Log("Node position: " + transform.position.ToString("F8"));
         Debug.Log("\tHeuristic: " + heuristic);
         Debug.Log("\tg: " + g);
-        Debug.Log("\trhs: " + rhs);
+        Debug.Log("\trhs: " + rhs); 
         Debug.Log("\tKey: " + key.ToString("F8"));
     }
-	
-
 }

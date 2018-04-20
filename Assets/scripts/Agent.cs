@@ -34,11 +34,12 @@ public class Agent : MonoBehaviour
         radius = rad;
     }
 
-    public List<GraphNode> sample_points(int num_nodes, GraphNode goal)
+    public List<GraphNode> sample_points(int num_nodes, Vector3 goal_position)
     {
         List<GraphNode> nodes = new List<GraphNode>();
+        nodes.Add(new GraphNode(transform.position, Vector3.Distance(goal_position, transform.position)));
 
-        for(int i = 0; i < num_nodes; i++)
+        for(int i = 0; i < num_nodes - 1; i++)
         {
             Vector3 sample_point = new Vector3(
                                         transform.position.x + vision_distance * Random.value, 
@@ -50,7 +51,7 @@ public class Agent : MonoBehaviour
                                 (transform.position - sample_point).normalized,
                                 out hit, vision_distance))
             {
-                nodes.Add(new GraphNode(sample_point, Vector3.Distance(goal.transform.position, sample_point)));
+                nodes.Add(new GraphNode(sample_point, Vector3.Distance(goal_position, sample_point)));
             }
 
             else
