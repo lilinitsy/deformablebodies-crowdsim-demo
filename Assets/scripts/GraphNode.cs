@@ -16,7 +16,7 @@ using UnityEngine;
  * 
 */
 
-public class GraphNode : MonoBehaviour 
+public class GraphNode
 {
     public List<GraphNode> neighbours;
     public List<float> costs;
@@ -41,6 +41,9 @@ public class GraphNode : MonoBehaviour
                         Mathf.Min(g, rhs + heuristic),
                         Mathf.Min(g, rhs));
         is_goal = false;
+
+        neighbours = new List<GraphNode>();
+        costs = new List<float>();
     }
 
     public GraphNode(Vector3 p, float h)
@@ -53,11 +56,14 @@ public class GraphNode : MonoBehaviour
                         Mathf.Min(g, rhs + heuristic),
                         Mathf.Min(g, rhs));
         is_goal = false;
+
+        neighbours = new List<GraphNode>();
+        costs = new List<float>();
     }
 
     void Start()
     {
-        transform.position = position;
+        // transform.position = position;
     }
 
 	// Update is called once per frame
@@ -76,7 +82,7 @@ public class GraphNode : MonoBehaviour
 
     public void to_string()
     {
-        Debug.Log("Node position: " + transform.position.ToString("F8"));
+        Debug.Log("Node position: " + position.ToString("F8"));
         Debug.Log("\tHeuristic: " + heuristic);
         Debug.Log("\tg: " + g);
         Debug.Log("\trhs: " + rhs); 

@@ -58,8 +58,21 @@ public class Crowd : MonoBehaviour
 	void Update() 
     {
 		construct_graph(num_nodes_sample, goal_position);
+		make_graph_neighbours(goal_position);
 
+		/*
+			the make graph neighbours function is too slow for C#
 
+			so to get around this, each agent, when it samples, will have
+			to make its own mini graph, with the average_position
+			passed in to make a node, and to have each agent's position also
+			be a node. Then, cfan make a mini graph, only evaluate those neighbours,
+			and do it for each eagent. Then, the whole graph can be merged,
+			but don't have nodes from Agent n be neighbours of nodes from Agent m.
+			Then, LPA* can be run on this graph, and that should be fast enough...
+
+		*/
+		to_string();
 
 
 
@@ -78,13 +91,67 @@ public class Crowd : MonoBehaviour
 		for(int i = 0; i < agents.Count; i++)
 		{
 			List<GraphNode> agent_graph = agents[i].sample_points(num_nodes, goal_position);
+
+			for(int j = 0; j < agent_graph.Count; j++)
+			{
+				graph.Add(agent_graph[j]);
+			}
 		}
 	}
 
+	private void make_graph_neighbours(Vector3 global_goal_position)
+	{
+		for(int i = 0; i < graph.Count; i++)
+		{
+			Vector3 node_position = graph[i].position;
+			
+			for(int j = 0; j < graph.Count; j++)
+			{
+				if(graph[i] != graph[j])
+				{
+					RaycastHit hit;
+
+					if(!Physics.SphereCast(graph[i].position, agent_radius,
+										(node_position - graph[i].position).normalized,
+										out hit))
+					{
+						graph[i].neighbours.Add(graph[j]);
+					}
+				}
+			}
+		}
+	}
 
 	// TODO: if time
 	private void calculate_avoidance_forces()
 	{
 
 	}
+
+	public void to_string()
+	{
+		for(int i = 0; i < graph.Count; i++)
+		{
+			Debug.Log("graph " + i + ": " + graph[i].position);
+			
+			for(int j = 0; j < graph[i].neighbours.Count; j++)
+			{
+				Debug.Log("Neighbour " + i + ": " + graph[i].neighbours[j].position);
+			}
+		}
+	}
 }
+
+
+/*
+	Identifies:
+		TV monitor
+		TV stand
+		Blue barrel: 2
+		Red barrel: 4
+		Fir tree: 2
+
+	Comments:
+		In a featureless gray room
+
+ */
