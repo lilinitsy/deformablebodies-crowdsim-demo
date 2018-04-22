@@ -78,6 +78,10 @@ public class GraphNode
         key = new Vector2(
                         Mathf.Min(g, rhs + heuristic),
                         Mathf.Min(g, rhs));
+        /*
+            Top paragraph of page 3 of D* Lite: A key is less than or equal to
+            another key iff k1.x < k2.x || k1.x == k2.x && k1.y <= k2.y
+        */
     }
 
     public void to_string()

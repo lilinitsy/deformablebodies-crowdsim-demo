@@ -19,20 +19,23 @@ public class Crowd : MonoBehaviour
 	public List<Agent> agents;
 	public int number_agents_to_spawn;
 	public int num_nodes_sample;
-
 	public float vision_distance;
 	public float agent_radius;
 	public float random_distance_for_agent_spawns;
-	public Vector3 goal_position;
-
+	public Vector3 global_goal_position;
+	private GraphNode goal;
 	private List<GraphNode> graph;
-
+	private List<GraphNode> path;
+	private LPAStarSearch search;
 
 	// Use this for initialization
 	void Start() 
     {
 		agents = new List<Agent>();
 		graph = new List<GraphNode>();
+		search = new LPAStarSearch();
+		path = new List<GraphNode>();
+		goal = new GraphNode(global_goal_position, 0.0f);
 
 		for(int i = 0; i < number_agents_to_spawn; i++)
 		{
@@ -45,8 +48,7 @@ public class Crowd : MonoBehaviour
 			tmp_agent.initialize(vision_distance, agent_radius);
 			
 			agents.Add(tmp_agent);
-		//	agents[i].initialize(vision_distance, agent_radius, agent_position);
-		} // new isn't the right way to do it, do some shit with prefabs or smth?
+		} 
 
         foreach(Transform child in transform)
         {
@@ -57,8 +59,8 @@ public class Crowd : MonoBehaviour
 	// Update is called once per frame
 	void Update() 
     {
-		construct_graph(num_nodes_sample, goal_position);
-		make_graph_neighbours(goal_position);
+		// construct_graph(num_nodes_sample, goal_position);
+		// make_graph_neighbours(goal_position);
 
 		/*
 			the make graph neighbours function is too slow for C#
@@ -71,11 +73,38 @@ public class Crowd : MonoBehaviour
 			but don't have nodes from Agent n be neighbours of nodes from Agent m.
 			Then, LPA* can be run on this graph, and that should be fast enough...
 
+			Or just do a fixed time-out and return the best path found in a time... 
+			have to balance with deformable body shit too, so :/
+
 		*/
-		to_string();
+		//to_string();
+		Vector3 average_position = new Vector3(0.0f, 0.0f, 0.0f);
 
+		for(int i = 0; i < agents.Count; i++)
+		{
+			average_position += agents[i].transform.position;
+		}
 
+		average_position /= agents.Count;
+		transform.position = average_position;
 
+		graph.Clear();
+		path.Clear();
+		construct_graph(num_nodes_sample);
+		make_graph_neighbours(global_goal_position);
+
+		// so this is copying correctly (line 42 of LPAStarSearch)
+		Debug.Log("Update graph neighbours: " + graph[0].neighbours.Count);
+		GraphNode start = new GraphNode(transform.position, Vector3.Distance(global_goal_position, transform.position));
+		search.initialize(graph, start, goal);
+		path = search.update(graph, start, goal);
+		Debug.Log("Time after: " + Time.deltaTime);
+
+		for(int i = 0; i < path.Count; i++)
+		{
+			Debug.Log("Path " + i + ": (" + path[i].position.x + ", " + path[i].position.y + 
+				", " + path[i].position.z + ")");
+		}
 
 
 
@@ -84,23 +113,32 @@ public class Crowd : MonoBehaviour
 	}
 
 
-	public void construct_graph(int num_nodes, Vector3 global_goal_position)
+	public void construct_graph(int num_nodes)
 	{
 		Vector3 average_position = new Vector3(0.0f, 0.0f, 0.0f);
 
 		for(int i = 0; i < agents.Count; i++)
 		{
-			List<GraphNode> agent_graph = agents[i].sample_points(num_nodes, goal_position);
+			List<GraphNode> agent_graph = agents[i].sample_points(num_nodes, global_goal_position);
+			average_position += agents[i].transform.position;
 
 			for(int j = 0; j < agent_graph.Count; j++)
 			{
 				graph.Add(agent_graph[j]);
 			}
 		}
+
+
+		average_position /= agents.Count;
+		transform.position = average_position;
+		GraphNode start = new GraphNode(transform.position, Vector2.Distance(transform.position, goal.position));
+		graph.Add(start);
+		graph.Add(goal);
 	}
 
 	private void make_graph_neighbours(Vector3 global_goal_position)
 	{
+		// huh, so this isn't doing it for the start and goals... makes sense Fix later
 		for(int i = 0; i < graph.Count; i++)
 		{
 			Vector3 node_position = graph[i].position;

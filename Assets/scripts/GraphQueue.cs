@@ -2,24 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GraphQueue : MonoBehaviour 
+public class GraphQueue 
 {
 
 	// child[0] will have parent[0]
 	// child[n] will have parent[n]
-	List<GraphNode> parent;
-	List<GraphNode> child;
+	public List<GraphNode> parent;
+	public List<GraphNode> child;
 
-	// Use this for initialization
-	void Start() 
+	public GraphQueue()
 	{
-		
-	}
-	
-	// Update is called once per frame
-	void Update() 
-	{
-		
+		child = new List<GraphNode>();
+		parent = new List<GraphNode>();
 	}
 
 	public void push(GraphNode c, GraphNode p)

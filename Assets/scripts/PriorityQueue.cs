@@ -2,23 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PriorityQueue : MonoBehaviour 
+public class PriorityQueue 
 {
 	// child[0] will have parent[0]
 	// child[n] will have parent[n]
-	List<GraphNode> child;
-	List<GraphNode> parent;
+	public List<GraphNode> child;
+	public List<GraphNode> parent;
 
-	// Use this for initialization
-	void Start() 
+	public PriorityQueue()
 	{
-		
-	}
-	
-	// Update is called once per frame
-	void Update() 
-	{
-		
+		child = new List<GraphNode>();
+		parent = new List<GraphNode>();
 	}
 
 	public void push(GraphNode c, GraphNode p)
@@ -27,6 +21,8 @@ public class PriorityQueue : MonoBehaviour
 		float key2 = c.key.y;
 		Vector2 key = new Vector2(key1, key2);
 
+		
+
 		// For each node, compare based on the LPA* key guidelines
 		for(int i = 0; i < child.Count; i++)
 		{
@@ -34,10 +30,17 @@ public class PriorityQueue : MonoBehaviour
 				(key.x == child[i].key.x &&
 				key.y < child[i].key.y))
 			{
-				child.Insert(i, c);
 				parent.Insert(i, p);
+				child.Insert(i, c);
 				return;
 			}
+		}
+
+		if(child.Count == 0)
+		{
+			parent.Insert(0, p);
+			child.Insert(0, c);
+			return;
 		}
 
 		/*
@@ -46,13 +49,13 @@ public class PriorityQueue : MonoBehaviour
 		*/
 		int count = child.Count;
 		child.Insert(count - 1, c);
-		child.Insert(count - 1, p);
+		parent.Insert(count - 1, p);
 	}
 
 	public void pop()
 	{
-		child.RemoveAt(0);
 		parent.RemoveAt(0);
+		child.RemoveAt(0);
 	}
 
 	public void remove(GraphNode n)
@@ -69,8 +72,8 @@ public class PriorityQueue : MonoBehaviour
 		{
 			if(n == child[i])
 			{
-				child.RemoveAt(i);
 				parent.RemoveAt(i);
+				child.RemoveAt(i);
 			}
 		}
 	}
