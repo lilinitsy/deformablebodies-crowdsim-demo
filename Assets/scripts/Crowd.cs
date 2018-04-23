@@ -19,10 +19,12 @@ public class Crowd : MonoBehaviour
 	public List<Agent> agents;
 	public int number_agents_to_spawn;
 	public int num_nodes_sample;
+	
 	public float vision_distance;
 	public float agent_radius;
 	public float random_distance_for_agent_spawns;
 	public Vector3 global_goal_position;
+
 	private GraphNode goal;
 	private List<GraphNode> graph;
 	private List<GraphNode> path;
@@ -138,7 +140,7 @@ public class Crowd : MonoBehaviour
 
 	private void make_graph_neighbours(Vector3 global_goal_position)
 	{
-		// huh, so this isn't doing it for the start and goals... makes sense Fix later
+		// huh, this wasn't doing it for the start and end goals, but I think that's b een fixed
 		for(int i = 0; i < graph.Count; i++)
 		{
 			Vector3 node_position = graph[i].position;
@@ -191,5 +193,8 @@ public class Crowd : MonoBehaviour
 
 	Comments:
 		In a featureless gray room
+
+		Interactive Virtual Materials
+Matthias Muller Markus Gross	
 
  */

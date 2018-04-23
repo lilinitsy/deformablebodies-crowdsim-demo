@@ -324,6 +324,16 @@ Prefab:
       propertyPath: num_nodes_sample
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114646022597624596, guid: 79047f56f313bb248ac4cea43d6ea56a,
+        type: 2}
+      propertyPath: random_distance_for_agent_spawns
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114646022597624596, guid: 79047f56f313bb248ac4cea43d6ea56a,
+        type: 2}
+      propertyPath: agent_radius
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79047f56f313bb248ac4cea43d6ea56a, type: 2}
   m_IsPrefabParent: 0
