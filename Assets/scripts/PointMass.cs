@@ -6,13 +6,14 @@ public class PointMass : MonoBehaviour
 {
 	public Vector3 position;
 
-	private Rigidbody rigidbody;
+	private Rigidbody rb;
 
 	// Use this for initialization
 	void Start() 
 	{
 		transform.position = position;
-		rigidbody.velocity = new Vector3(0.0f, 0.0f, 0.0f);
+		rb = gameObject.AddComponent(typeof(Rigidbody)) as Rigidbody;
+		rb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
 	}
 	
 	// Update is called once per frame
@@ -23,6 +24,6 @@ public class PointMass : MonoBehaviour
 
 	void to_string()
 	{
-		Debug.Log("Position: " + transform.position.ToString("F8") + "\t Velocity: " + rigidbody.velocity.ToString());
+		Debug.Log("Position: " + transform.position.ToString("F8") + "\t Velocity: " + rb.velocity.ToString());
 	}
 }
