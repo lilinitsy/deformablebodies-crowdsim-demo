@@ -6,7 +6,7 @@ public class PointMass : MonoBehaviour
 {
 	public Vector3 position;
 
-	private Rigidbody rb;
+	public Rigidbody rb;
 
 	// Use this for initialization
 	void Start() 
@@ -19,7 +19,7 @@ public class PointMass : MonoBehaviour
 	// Update is called once per frame
 	void Update() 
 	{
-		
+		transform.position = position;
 	}
 
 	void to_string()

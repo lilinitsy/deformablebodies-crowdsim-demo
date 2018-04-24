@@ -17,6 +17,7 @@ public class DeformableBody : MonoBehaviour {
 	public int depth; // z
 
 	private List<PointMass> point_mass_list;
+	PointMass[ , , ] old_old_pointmass;
 	PointMass[ , , ] old_pointmass;
 	PointMass[ , , ] point_mass;
 
@@ -38,6 +39,7 @@ public class DeformableBody : MonoBehaviour {
 		mesh.triangles = new_triangles;
 
 		point_mass_list = new List<PointMass>();
+		old_old_pointmass = new PointMass[width, height, depth];
 		old_pointmass = new PointMass[width, height, depth];
 		point_mass = new PointMass[width, height, depth];
 
@@ -82,12 +84,70 @@ public class DeformableBody : MonoBehaviour {
 		}
 	}
 
-	private void spring_force_calculations()
+	private void spring_force_calculations(float delta_time)
 	{
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height; j++)
+			{
+				for(int k = 0; k < depth; k++)
+				{
+					old_pointmass[i, j, k].position = old_old_pointmass[i, j, k].position;
+				}
+			}
+		}
+		// calculate all the x forces
 		for(int i = 0; i < width - 1; i++)
 		{
-			
+			for(int j = 0; j < height; j++)
+			{
+				for(int k = 0; k < depth; k++)
+				{
+					Vector3 e = old_pointmass[i + 1, j, k].position - old_pointmass[i, j, k].position;
+					float l = Vector3.Magnitude(e);
+					e.Normalize();
+
+					// need to check for self-collisions; will do later
+
+
+					
+					// else (not self-collision), do verlet integration
+					// need to calculate force though; have a private function for this, based off sound
+					// once we get force, need to equate that to acceleration
+					float force = -0.5f * k * (rest_length - l) - k_dampening * (Vector3.Dot(e, old_pointmass[i, j, k].position - old_old_pointmass[i, j, k].position) / delta_time);
+
+					float accel = 1.0f; // default to 1
+					Vector3 tmp_position = 2.0f * point_mass[i, j, k].position
+													- old_pointmass[i, j, k].position
+													+ (force / mass) * e * accel * delta_time * delta_time;
+					
+					point_mass[i, j, k].position = tmp_position;
+				}
+			}
 		}
+
+		// all the y forces
+
+
+
+
+		// all the z forces
+
+
+
+
+		// update the old_pointmass array
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height; j++)
+			{
+				for(int k = 0; k < depth; k++)
+				{
+					old_old_pointmass[i, j, k].position = point_mass[i, j, k].position;
+				}
+			}
+		}
+
 	}
 
 	void to_string()
