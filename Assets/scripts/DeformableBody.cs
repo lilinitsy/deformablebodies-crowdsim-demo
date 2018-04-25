@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DeformableBody : MonoBehaviour {
+	public PointMass pointmass_prefab;
+
 	public Vector3 position;
 	public Vector3[] new_vertices;
 	public Vector2[] new_uv;
@@ -12,6 +14,7 @@ public class DeformableBody : MonoBehaviour {
 	public float k;
 	public float k_dampening;
 	public float mass;
+	public float dt;
 	public int width; // x
 	public int height; // y
 	public int depth; // z
@@ -21,7 +24,9 @@ public class DeformableBody : MonoBehaviour {
 	PointMass[ , , ] old_pointmass;
 	PointMass[ , , ] point_mass;
 
-
+/*****************************************************************************
+http://wiki.roblox.com/index.php?title=Verlet_integration
+*****************************************************************************/
 	// Use this for initialization
 	void Start() 
 	{
@@ -43,8 +48,6 @@ public class DeformableBody : MonoBehaviour {
 		old_pointmass = new PointMass[width, height, depth];
 		point_mass = new PointMass[width, height, depth];
 
-		spring_force_calculations();
-
 		init();
 	}
 	
@@ -64,11 +67,34 @@ public class DeformableBody : MonoBehaviour {
 
 		// like cloth now...
 
-		// 
+		spring_force_calculations(dt);
 	}
 
 	private void init()
 	{
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height; j++)
+			{
+				for(int k = 0; k < depth; k++)
+				{
+					/* 	Agent tmp_agent = Instantiate(agent_prefab, agent_position, Quaternion.identity) as Agent;
+						tmp_agent.transform.parent = transform;
+						tmp_agent.initialize(vision_distance, agent_radius);
+			
+						agents.Add(tmp_agent);
+					*/
+					PointMass point_mass = Instantiate(pointmass_prefab, 
+											new Vector3(0, 0, 0),
+											Quaternion.identity) as PointMass;
+					point_mass.transform.parent = transform;
+					point_mass.position = new Vector3(i * rest_length, j * rest_length, k * rest_length);
+					point_mass.to_string();
+					point_mass_list.Add(point_mass);
+				}
+			}
+		}
+		
 		int pm_count = 0;
 
 		for(int i = 0; i < width; i++)
@@ -77,13 +103,17 @@ public class DeformableBody : MonoBehaviour {
 			{
 				for(int k = 0; k < depth; k++)
 				{
+					old_old_pointmass[i, j, k] = point_mass_list[pm_count];
 					old_pointmass[i, j, k] = point_mass_list[pm_count];
+					point_mass[i, j, k] = point_mass_list[pm_count];
 					pm_count++;
 				}
 			}
 		}
 	}
 
+
+	// the old/old_old is wrong, check the roblox link above tomorrow to fix
 	private void spring_force_calculations(float delta_time)
 	{
 		for(int i = 0; i < width; i++)
@@ -114,14 +144,16 @@ public class DeformableBody : MonoBehaviour {
 					// else (not self-collision), do verlet integration
 					// need to calculate force though; have a private function for this, based off sound
 					// once we get force, need to equate that to acceleration
-					float force = -0.5f * k * (rest_length - l) - k_dampening * (Vector3.Dot(e, old_pointmass[i, j, k].position - old_old_pointmass[i, j, k].position) / delta_time);
+					float force = -0.5f * k * (rest_length - l) - k_dampening * 
+								(Vector3.Dot(e, old_pointmass[i, j, k].position - old_old_pointmass[i, j, k].position) / 
+								delta_time);
+					Debug.Log("Force: " + force.ToString("F8"));
 
 					float accel = 1.0f; // default to 1
-					Vector3 tmp_position = 2.0f * point_mass[i, j, k].position
+					Vector3 new_position = 2.0f * point_mass[i, j, k].position
 													- old_pointmass[i, j, k].position
-													+ (force / mass) * e * accel * delta_time * delta_time;
-					
-					point_mass[i, j, k].position = tmp_position;
+													+ (force / point_mass[i, j, k].rb.mass) * e * accel * delta_time * delta_time;
+				//	point_mass[i, j, k].position = tmp_position;
 				}
 			}
 		}

@@ -12,7 +12,6 @@ public class PointMass : MonoBehaviour
 	void Start() 
 	{
 		transform.position = position;
-		rb = gameObject.AddComponent(typeof(Rigidbody)) as Rigidbody;
 		rb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
 	}
 	
@@ -22,7 +21,7 @@ public class PointMass : MonoBehaviour
 		transform.position = position;
 	}
 
-	void to_string()
+	public void to_string()
 	{
 		Debug.Log("Position: " + transform.position.ToString("F8") + "\t Velocity: " + rb.velocity.ToString());
 	}
