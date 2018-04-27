@@ -149,20 +149,15 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 				for(int k = 0; k < depth; k++)
 				{
 					Vector3 e = old_pointmass[i + 1, j, k].position - old_pointmass[i, j, k].position;
-					float l = Vector3.Magnitude(e);
-					e.Normalize();
-					//Debug.Log("The vector e at " + i + " " + j + " " + k + ": " + e.ToString("F8"));
-					//Debug.Log("l: " + l.ToString("F8"));
+					float l = Vector3.Magnitude(e); // confirmed functioning
+					e.Normalize(); // confirmed functioning
 
-					float force_spring = -1.0f * k_spring * (rest_length - l);
-					//Debug.Log("Force: " + force_spring.ToString("F8"));
-					Debug.Log("Position before: " + point_mass[i, j, k].position.ToString("F8"));
-					Vector3 delta_position = 0.5f * point_mass[i, j, k].position - old_pointmass[i, j, k].position + 
-											e * (force_spring / mass)  * delta_time;
-					point_mass[i, j, k].position += delta_position;
-					point_mass[i + 1, j, k].position -= delta_position;
-					Debug.Log("Position after: " + point_mass[i, j, k].position.ToString("F8"));
+					float v1 = Vector3.Dot(e, old_pointmass[i, j, k].rb.velocity);
+					float v2 = Vector3.Dot(e, old_pointmass[i + 1, j, k].rb.velocity);
+					float force = -1.0f * k_spring * (rest_length - l); // - k_dampening * (v1 - v2);
 
+					point_mass[i, j, k].rb.velocity += (force / mass) * e * delta_time;
+					point_mass[i + 1, j, k].rb.velocity -= (force / mass) * e * delta_time;
 				}
 			}
 		} 
@@ -176,6 +171,17 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 
 
 
+		// assign positions based on velocities
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height; j++)
+			{
+				for(int k = 0; k < depth; k++)
+				{
+					point_mass[i, j, k].position += point_mass[i, j, k].rb.velocity * delta_time;
+				}
+			}
+		}
 
 		// update the old_pointmass array
 		for(int i = 0; i < width; i++)

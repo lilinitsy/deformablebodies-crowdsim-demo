@@ -13,6 +13,7 @@ public class PointMass : MonoBehaviour
 	{
 		transform.position = position;
 		rb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
+		rb.useGravity = false;
 	}
 	
 	// Update is called once per frame
