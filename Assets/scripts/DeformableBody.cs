@@ -154,7 +154,7 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 
 					float v1 = Vector3.Dot(e, old_pointmass[i, j, k].rb.velocity);
 					float v2 = Vector3.Dot(e, old_pointmass[i + 1, j, k].rb.velocity);
-					float force = -1.0f * k_spring * (rest_length - l); // - k_dampening * (v1 - v2);
+					float force = -1.0f * k_spring * (rest_length - l) - k_dampening * (v1 - v2);
 
 					point_mass[i, j, k].rb.velocity += (force / mass) * e * delta_time;
 					point_mass[i + 1, j, k].rb.velocity -= (force / mass) * e * delta_time;
@@ -163,12 +163,48 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 		} 
 
 		// all the y forces
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height - 1; j++)
+			{
+				for(int k = 0; k < depth; k++)
+				{
+					Vector3 e = old_pointmass[i, j + 1, k].position - old_pointmass[i, j, k].position;
+					float l = Vector3.Magnitude(e); // confirmed functioning
+					e.Normalize(); // confirmed functioning
 
+					float v1 = Vector3.Dot(e, old_pointmass[i, j, k].rb.velocity);
+					float v2 = Vector3.Dot(e, old_pointmass[i, j + 1, k].rb.velocity);
+					float force = -1.0f * k_spring * (rest_length - l) - k_dampening * (v1 - v2);
+
+					point_mass[i, j, k].rb.velocity += (force / mass) * e * delta_time;
+					point_mass[i, j + 1, k].rb.velocity -= (force / mass) * e * delta_time;
+				}
+			}
+		}
 
 
 
 		// all the z forces
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height; j++)
+			{
+				for(int k = 0; k < depth - 1; k++)
+				{
+					Vector3 e = old_pointmass[i, j, k + 1].position - old_pointmass[i, j, k].position;
+					float l = Vector3.Magnitude(e); // confirmed functioning
+					e.Normalize(); // confirmed functioning
 
+					float v1 = Vector3.Dot(e, old_pointmass[i, j, k].rb.velocity);
+					float v2 = Vector3.Dot(e, old_pointmass[i, j, k + 1].rb.velocity);
+					float force = -1.0f * k_spring * (rest_length - l) - k_dampening * (v1 - v2);
+
+					point_mass[i, j, k].rb.velocity += (force / mass) * e * delta_time;
+					point_mass[i, j, k + 1].rb.velocity -= (force / mass) * e * delta_time;
+				}
+			}
+		}
 
 
 		// assign positions based on velocities

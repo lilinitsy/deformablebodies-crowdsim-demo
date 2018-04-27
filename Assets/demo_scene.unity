@@ -152,7 +152,7 @@ MonoBehaviour:
   k_spring: 40
   k_dampening: 20
   mass: 4
-  dt: 0.01
+  dt: 0.005
   width: 5
   height: 5
   depth: 5
