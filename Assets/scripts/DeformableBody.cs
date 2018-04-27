@@ -20,7 +20,7 @@ public class DeformableBody : MonoBehaviour {
 	public int depth; // z
 
 	private List<PointMass> point_mass_list;
-	PointMass[ , , ] old_old_pointmass;
+	PointMass[ , , ] tmp_value_pointmass;
 	PointMass[ , , ] old_pointmass;
 	PointMass[ , , ] point_mass;
 
@@ -44,7 +44,7 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 		mesh.triangles = new_triangles;
 
 		point_mass_list = new List<PointMass>();
-		old_old_pointmass = new PointMass[width, height, depth];
+		tmp_value_pointmass = new PointMass[width, height, depth];
 		old_pointmass = new PointMass[width, height, depth];
 		point_mass = new PointMass[width, height, depth];
 
@@ -54,6 +54,7 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 	// Update is called once per frame
 	void Update() 
 	{
+		Debug.Log("Fps: " + 1 / Time.deltaTime);
 		Mesh mesh = GetComponent<MeshFilter>().mesh;
 		Vector3[] vertices = mesh.vertices;
 		Vector3[] normals = mesh.normals;
@@ -103,7 +104,7 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 			{
 				for(int k = 0; k < depth; k++)
 				{
-					old_old_pointmass[i, j, k] = point_mass_list[pm_count];
+					tmp_value_pointmass[i, j, k] = point_mass_list[pm_count];
 					old_pointmass[i, j, k] = point_mass_list[pm_count];
 					point_mass[i, j, k] = point_mass_list[pm_count];
 					pm_count++;
@@ -122,11 +123,12 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 			{
 				for(int k = 0; k < depth; k++)
 				{
-					old_pointmass[i, j, k].position = old_old_pointmass[i, j, k].position;
+					old_pointmass[i, j, k].position = point_mass[i, j, k].position;
 				}
 			}
 		}
 		// calculate all the x forces
+		
 		for(int i = 0; i < width - 1; i++)
 		{
 			for(int j = 0; j < height; j++)
@@ -144,19 +146,20 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 					// else (not self-collision), do verlet integration
 					// need to calculate force though; have a private function for this, based off sound
 					// once we get force, need to equate that to acceleration
-					float force = -0.5f * k * (rest_length - l) - k_dampening * 
-								(Vector3.Dot(e, old_pointmass[i, j, k].position - old_old_pointmass[i, j, k].position) / 
+					float force_physical = -0.5f * k * (rest_length - l) - k_dampening * 
+								(Vector3.Dot(e, old_pointmass[i, j, k].position - tmp_value_pointmass[i, j, k].position) / 
 								delta_time);
-					Debug.Log("Force: " + force.ToString("F8"));
+					float force_sound = 0.0f; // todo later
+					float force = force_physical + force_sound;
+//					Debug.Log("Force: " + force.ToString("F8"));
 
-					float accel = 1.0f; // default to 1
 					Vector3 new_position = 2.0f * point_mass[i, j, k].position
 													- old_pointmass[i, j, k].position
-													+ (force / point_mass[i, j, k].rb.mass) * e * accel * delta_time * delta_time;
-				//	point_mass[i, j, k].position = tmp_position;
+													+ (force / point_mass[i, j, k].rb.mass) * e * delta_time * delta_time;
+					point_mass[i, j, k].position += new_position;
 				}
 			}
-		}
+		} 
 
 		// all the y forces
 
@@ -175,7 +178,7 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 			{
 				for(int k = 0; k < depth; k++)
 				{
-					old_old_pointmass[i, j, k].position = point_mass[i, j, k].position;
+					tmp_value_pointmass[i, j, k].position = old_pointmass[i, j, k].position;
 				}
 			}
 		}
