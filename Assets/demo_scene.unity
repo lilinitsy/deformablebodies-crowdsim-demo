@@ -149,7 +149,7 @@ MonoBehaviour:
   new_uv: []
   new_triangles: 
   rest_length: 0.2
-  k: 100
+  k_spring: 40
   k_dampening: 20
   mass: 4
   dt: 0.01
