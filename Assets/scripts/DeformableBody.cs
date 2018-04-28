@@ -5,6 +5,8 @@ using UnityEngine;
 public class DeformableBody : MonoBehaviour {
 	public PointMass pointmass_prefab;
 
+	public AudioSource audio_source; // DO NOT attach an audiosource to the jelly; attach it here so I can get a distance
+
 	public Vector3 position;
 	public Vector3[] new_vertices;
 	public Vector2[] new_uv;
@@ -20,9 +22,9 @@ public class DeformableBody : MonoBehaviour {
 	public int depth; // z
 
 	private List<PointMass> point_mass_list;
-	PointMass[ , , ] tmp_intermediate_pointmass;
-	PointMass[ , , ] old_pointmass;
-	PointMass[ , , ] point_mass;
+	private PointMass[ , , ] tmp_intermediate_pointmass;
+	private PointMass[ , , ] old_pointmass;
+	private PointMass[ , , ] point_mass;
 
 /*****************************************************************************
 http://wiki.roblox.com/index.php?title=Verlet_integration
@@ -230,7 +232,18 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 				}
 			}
 		}
+	}
 
+	/*
+		Have to do something with the sound energy force...
+		Frequency: mostly determines pitch
+		Use AudioClip.clip from https://docs.unity3d.com/ScriptReference/AudioSource.html
+		AudioClip functions will then be useful https://docs.unity3d.com/ScriptReference/AudioClip.html
+	*/
+	private float sound_force_calculations(Vector3 point_position)
+	{
+
+		return 0.0f;
 	}
 
 	void to_string()
