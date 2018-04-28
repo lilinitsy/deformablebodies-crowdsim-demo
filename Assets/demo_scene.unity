@@ -144,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointmass_prefab: {fileID: 114351136587501322, guid: 9d398ad4122fcef4190da32c613047b1,
     type: 2}
-  audio_source: {fileID: 0}
+  audio_source: {fileID: 1440635464}
   position: {x: 0, y: 0, z: 0}
   new_vertices: []
   new_uv: []

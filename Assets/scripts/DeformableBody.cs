@@ -21,19 +21,22 @@ public class DeformableBody : MonoBehaviour {
 	public int height; // y
 	public int depth; // z
 
+	private float[] spectrum;
 	private List<PointMass> point_mass_list;
 	private PointMass[ , , ] tmp_intermediate_pointmass;
 	private PointMass[ , , ] old_pointmass;
 	private PointMass[ , , ] point_mass;
+	private AudioClip song;
 
 /*****************************************************************************
 http://wiki.roblox.com/index.php?title=Verlet_integration
+could be useful if I want to try Verlet again...
+Also might want to consider Implicit Euler instead.
 *****************************************************************************/
 	// Use this for initialization
 	void Start() 
 	{
 		transform.position = position;
-
 		// before making the mesh, 
 		// get the vertices from all the child pointmasses or some shit
 // 			Agent tmp_agent = Instantiate(agent_prefab, agent_position, Quaternion.identity) as Agent;
@@ -50,13 +53,18 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 		old_pointmass = new PointMass[width, height, depth];
 		point_mass = new PointMass[width, height, depth];
 
+		spectrum = new float[256];
+		song = audio_source.clip;
+
 		init();
 	}
 	
+	// check out http://www.kaappine.fi/tutorials/using-microphone-input-in-unity3d/
 	// Update is called once per frame
+	// Thiiiiink the outtput data is what is needed... but not sure.
 	void Update() 
 	{
-		Debug.Log("Fps: " + 1 / Time.deltaTime);
+		// Debug.Log("Fps: " + 1 / Time.deltaTime);
 		Mesh mesh = GetComponent<MeshFilter>().mesh;
 		Vector3[] vertices = mesh.vertices;
 		Vector3[] normals = mesh.normals;
@@ -67,6 +75,16 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 		}
 
 		mesh.vertices = vertices;
+
+		float volume = 0.0f;
+		audio_source.GetOutputData(spectrum, 0);
+
+		for(int i = 0; i < 256; i++)
+		{
+
+			volume += Mathf.Abs(spectrum[i]);
+		}
+		Debug.Log("Volume: " + volume);
 
 		// like cloth now...
 
@@ -81,12 +99,6 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 			{
 				for(int k = 0; k < depth; k++)
 				{
-					/* 	Agent tmp_agent = Instantiate(agent_prefab, agent_position, Quaternion.identity) as Agent;
-						tmp_agent.transform.parent = transform;
-						tmp_agent.initialize(vision_distance, agent_radius);
-			
-						agents.Add(tmp_agent);
-					*/
 					PointMass point_mass = Instantiate(pointmass_prefab, 
 											new Vector3(0, 0, 0),
 											Quaternion.identity) as PointMass;
@@ -124,7 +136,6 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 	*/
 	private void spring_force_calculations(float delta_time)
 	{
-		Debug.Log("fps: " + 1 / Time.deltaTime);
 		/*
 			This triple for loop block will assign the tmp_intermediate pointmass
 			to the normal pointmass; this will need to be done so that after the computations
@@ -239,10 +250,11 @@ http://wiki.roblox.com/index.php?title=Verlet_integration
 		Frequency: mostly determines pitch
 		Use AudioClip.clip from https://docs.unity3d.com/ScriptReference/AudioSource.html
 		AudioClip functions will then be useful https://docs.unity3d.com/ScriptReference/AudioClip.html
+		AudioClip.frequency only gives the frequency everything was recorded in, not the sound data shit...
 	*/
 	private float sound_force_calculations(Vector3 point_position)
 	{
-
+		
 		return 0.0f;
 	}
 
