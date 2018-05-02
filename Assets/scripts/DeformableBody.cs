@@ -22,7 +22,7 @@ public class DeformableBody : MonoBehaviour {
 	public int height; // y
 	public int depth; // z
 
-	private float[] spectrum_samples;
+	public float[] spectrum_samples;
 	private float[] frequency_groups;
 	private List<PointMass> point_mass_list;
 	private PointMass[ , , ] tmp_intermediate_pointmass;
@@ -55,7 +55,7 @@ Also might want to consider Implicit Euler instead.
 		old_pointmass = new PointMass[width, height, depth];
 		point_mass = new PointMass[width, height, depth];
 
-		spectrum_samples = new float[256];
+		spectrum_samples = new float[512];
 		frequency_groups = new float[8];
 		song = audio_source.clip;
 
@@ -92,7 +92,6 @@ Also might want to consider Implicit Euler instead.
 
 		average_position /= width * height * depth;
 		gameObject.transform.GetChild(0).transform.position = average_position;
-
 
 		// like cloth now...
 
@@ -424,10 +423,10 @@ Also might want to consider Implicit Euler instead.
 	{
 		// Probably need to use GetSpectrumData https://www.youtube.com/watch?v=4Av788P9stk
 		int count = 0;
-		for(int i = 0; i < 4; i++) // maybe need to do i < 5?
+		for(int i = 0; i < 8; i++) // maybe need to do i < 5?
 		{
 			float average = 0.0f;
-			int sample_count = (int) Mathf.Pow(2, i) * 16;
+			int sample_count = (int) Mathf.Pow(2, i) * 2;
 
 			for(int j = 0; j < sample_count; j++)
 			{
