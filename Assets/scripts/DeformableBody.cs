@@ -6,6 +6,9 @@ public class DeformableBody : MonoBehaviour {
 	public PointMass pointmass_prefab;
 
 	public AudioSource audio_source; // DO NOT attach an audiosource to the jelly; attach it here so I can get a distance
+	public AudioSource audio_source2;
+	public AudioSource audio_source3;
+	public AudioSource audio_source4;
 
 	public Vector3 position;
 	public Vector3 average_position;
@@ -28,7 +31,6 @@ public class DeformableBody : MonoBehaviour {
 	private PointMass[ , , ] tmp_intermediate_pointmass;
 	private PointMass[ , , ] old_pointmass;
 	private PointMass[ , , ] point_mass;
-	private AudioClip song;
 
 /*****************************************************************************
 http://wiki.roblox.com/index.php?title=Verlet_integration
@@ -38,6 +40,9 @@ Also might want to consider Implicit Euler instead.
 	// Use this for initialization
 	void Start() 
 	{
+				Debug.Log("-: " + -1 * width / 2);
+		Debug.Log("+: " + width / 2);
+
 		transform.position = position;
 		// before making the mesh, 
 		// get the vertices from all the child pointmasses or some shit
@@ -57,7 +62,6 @@ Also might want to consider Implicit Euler instead.
 
 		spectrum_samples = new float[512];
 		frequency_groups = new float[8];
-		song = audio_source.clip;
 
 		init();
 	}
@@ -91,7 +95,7 @@ Also might want to consider Implicit Euler instead.
 		}
 
 		average_position /= width * height * depth;
-		gameObject.transform.GetChild(0).transform.position = average_position;
+		// gameObject.transform.GetChild(0).transform.position = average_position;
 
 		// like cloth now...
 
@@ -100,11 +104,11 @@ Also might want to consider Implicit Euler instead.
 
 	private void init()
 	{
-		for(int i = -1 * width / 2; i < width / 2; i++)
+		for(int i = -1 * width / 2; i < width / 2 + 1; i++)
 		{
-			for(int j = -1 * width / 2; j < height / 2; j++)
+			for(int j = -1 * width / 2; j < height / 2 + 1; j++)
 			{
-				for(int k = -1 * width / 2; k < depth / 2; k++)
+				for(int k = -1 * width / 2; k < depth / 2 + 1; k++)
 				{
 					PointMass point_mass = Instantiate(pointmass_prefab, 
 											new Vector3(0, 0, 0),
@@ -250,7 +254,11 @@ Also might want to consider Implicit Euler instead.
 			{
 				for(int k = 0; k < depth / 2; k++)
 				{
-					Vector3 e = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e1 = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e2 = audio_source2.transform.position - point_mass[i, j, k].position;
+					Vector3 e3 = audio_source3.transform.position - point_mass[i, j, k].position;
+					Vector3 e4 = audio_source4.transform.position - point_mass[i, j, k].position;
+					Vector3 e = e1 + e2 + e3 + e4;
 					float l = Vector3.Magnitude(e); // confirmed functioning
 					e.Normalize();
 
@@ -267,7 +275,11 @@ Also might want to consider Implicit Euler instead.
 			{
 				for(int k = depth / 2; k < depth; k++)
 				{
-					Vector3 e = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e1 = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e2 = audio_source2.transform.position - point_mass[i, j, k].position;
+					Vector3 e3 = audio_source3.transform.position - point_mass[i, j, k].position;
+					Vector3 e4 = audio_source4.transform.position - point_mass[i, j, k].position;
+					Vector3 e = e1 + e2 + e3 + e4;
 					float l = Vector3.Magnitude(e); // confirmed functioning
 					e.Normalize();
 
@@ -284,7 +296,11 @@ Also might want to consider Implicit Euler instead.
 			{
 				for(int k = 0; k < depth / 2; k++)
 				{
-					Vector3 e = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e1 = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e2 = audio_source2.transform.position - point_mass[i, j, k].position;
+					Vector3 e3 = audio_source3.transform.position - point_mass[i, j, k].position;
+					Vector3 e4 = audio_source4.transform.position - point_mass[i, j, k].position;
+					Vector3 e = e1 + e2 + e3 + e4;
 					float l = Vector3.Magnitude(e); // confirmed functioning
 					e.Normalize();
 
@@ -301,7 +317,11 @@ Also might want to consider Implicit Euler instead.
 			{
 				for(int k = depth / 2; k < depth; k++)
 				{
-					Vector3 e = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e1 = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e2 = audio_source2.transform.position - point_mass[i, j, k].position;
+					Vector3 e3 = audio_source3.transform.position - point_mass[i, j, k].position;
+					Vector3 e4 = audio_source4.transform.position - point_mass[i, j, k].position;
+					Vector3 e = e1 + e2 + e3 + e4;
 					float l = Vector3.Magnitude(e); // confirmed functioning
 					e.Normalize();
 
@@ -318,7 +338,11 @@ Also might want to consider Implicit Euler instead.
 			{
 				for(int k = 0; k < depth / 2; k++)
 				{
-					Vector3 e = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e1 = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e2 = audio_source2.transform.position - point_mass[i, j, k].position;
+					Vector3 e3 = audio_source3.transform.position - point_mass[i, j, k].position;
+					Vector3 e4 = audio_source4.transform.position - point_mass[i, j, k].position;
+					Vector3 e = e1 + e2 + e3 + e4;
 					float l = Vector3.Magnitude(e); // confirmed functioning
 					e.Normalize();
 
@@ -335,7 +359,11 @@ Also might want to consider Implicit Euler instead.
 			{
 				for(int k = depth / 2; k < depth; k++)
 				{
-					Vector3 e = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e1 = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e2 = audio_source2.transform.position - point_mass[i, j, k].position;
+					Vector3 e3 = audio_source3.transform.position - point_mass[i, j, k].position;
+					Vector3 e4 = audio_source4.transform.position - point_mass[i, j, k].position;
+					Vector3 e = e1 + e2 + e3 + e4;
 					float l = Vector3.Magnitude(e); // confirmed functioning
 					e.Normalize();
 
@@ -352,7 +380,11 @@ Also might want to consider Implicit Euler instead.
 			{
 				for(int k = 0; k < depth / 2; k++)
 				{
-					Vector3 e = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e1 = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e2 = audio_source2.transform.position - point_mass[i, j, k].position;
+					Vector3 e3 = audio_source3.transform.position - point_mass[i, j, k].position;
+					Vector3 e4 = audio_source4.transform.position - point_mass[i, j, k].position;
+					Vector3 e = e1 + e2 + e3 + e4;
 					float l = Vector3.Magnitude(e); // confirmed functioning
 					e.Normalize();
 
@@ -369,7 +401,11 @@ Also might want to consider Implicit Euler instead.
 			{
 				for(int k = depth / 2; k < depth; k++)
 				{
-					Vector3 e = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e1 = audio_source.transform.position - point_mass[i, j, k].position;
+					Vector3 e2 = audio_source2.transform.position - point_mass[i, j, k].position;
+					Vector3 e3 = audio_source3.transform.position - point_mass[i, j, k].position;
+					Vector3 e4 = audio_source4.transform.position - point_mass[i, j, k].position;
+					Vector3 e = e1 + e2 + e3 + e4;
 					float l = Vector3.Magnitude(e); // confirmed functioning
 					e.Normalize();
 
