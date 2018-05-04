@@ -61,29 +61,17 @@ public class SoundDeformation : MonoBehaviour {
 		}
 
 		mesh.vertices = vertices;
-
-		for(int i = 0; i < width; i++)
-		{
-			for(int j = 0; j < height; j++)
-			{
-				for(int k = 0; k < depth; k++)
-				{
-					average_position += point_mass[i, j, k].position;
-				}
-			}
-		}
-
-		average_position /= width * height * depth;
-		gameObject.transform.GetChild(0).transform.position = average_position;
-		
+				
 		audio_source.GetSpectrumData(spectrum_samples, 0, FFTWindow.Rectangular);
 		frequency_groups = calculate_frequency_groups();
-		
+		audio_source.transform.position = transform.position;
+
 		for(int i = 0; i < 512; i++)
 		{
 			/*
 				get the unit vector e
 					e = Vector3.Normalize(audio_source.transform.position - point_masslist[i])
+					do this in sound_deformation
 			 */
 		}
 
@@ -165,7 +153,7 @@ public class SoundDeformation : MonoBehaviour {
 			}
 
 			average /= count;
-			f_group[i] = average * 10;
+			f_group[i] = average * 2;
 		}
 
 
