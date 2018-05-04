@@ -86,7 +86,7 @@ public class GraphNode
 
     public void to_string()
     {
-        Debug.Log("Node position: " + position.ToString("F8"));
+        Debug.Log("\tNode position: " + position.ToString("F8"));
         Debug.Log("\tHeuristic: " + heuristic);
         Debug.Log("\tg: " + g);
         Debug.Log("\trhs: " + rhs); 

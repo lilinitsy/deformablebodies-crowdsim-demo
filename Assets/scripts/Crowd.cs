@@ -28,7 +28,7 @@ public class Crowd : MonoBehaviour
 	private GraphNode goal;
 	private List<GraphNode> graph;
 	private List<GraphNode> path;
-	private LPAStarSearch search;
+	public LPAStarSearch search;
 
 	// Use this for initialization
 	void Start() 
@@ -52,10 +52,48 @@ public class Crowd : MonoBehaviour
 			agents.Add(tmp_agent);
 		} 
 
+	/* 
         foreach(Transform child in transform)
         {
             Debug.Log(child.transform.position);
-        }
+		} */
+
+		Vector3 average_position = new Vector3(0.0f, 0.0f, 0.0f);
+
+		for(int i = 0; i < agents.Count; i++)
+		{
+			average_position += agents[i].transform.position;
+		}
+
+		average_position /= agents.Count;
+		transform.position = average_position;
+		GraphNode start = new GraphNode(average_position, Vector3.Distance(average_position, global_goal_position));
+
+		construct_graph(num_nodes_sample);
+		make_graph_neighbours(global_goal_position);
+		search.initialize(graph, start, goal);
+		path = search.update(graph, start, goal);
+
+		Debug.Log("Path length: " + path.Count);
+
+		for(int i = 0; i < path.Count; i++)
+		{
+			Debug.Log("Node in path: " + i);
+			Debug.Log("\t" + path[i].position.ToString("F8"));
+		}
+
+		/* 
+		for(int i = 0; i < graph.Count; i++)
+		{
+			for(int j = 0; j < graph[i].neighbours.Count; j++)
+			{
+				Debug.DrawLine(graph[i].position, graph[i].neighbours[j].position, Color.blue);
+			}
+		}
+		*/
+
+		// search.initialize(graph, start, goal); 
+
 	}
 	
 	// Update is called once per frame
@@ -79,37 +117,11 @@ public class Crowd : MonoBehaviour
 			have to balance with deformable body shit too, so :/
 
 		*/
-		//to_string();
-		Vector3 average_position = new Vector3(0.0f, 0.0f, 0.0f);
-
-		for(int i = 0; i < agents.Count; i++)
+	
+		for(int i = 0; i < path.Count - 1; i++)
 		{
-			average_position += agents[i].transform.position;
+			Debug.DrawLine(path[i].position, path[i + 1].position, Color.blue);
 		}
-
-		average_position /= agents.Count;
-		transform.position = average_position;
-
-		graph.Clear();
-		path.Clear();
-		construct_graph(num_nodes_sample);
-		make_graph_neighbours(global_goal_position);
-
-		// so this is copying correctly (line 42 of LPAStarSearch)
-		Debug.Log("Update graph neighbours: " + graph[0].neighbours.Count);
-		GraphNode start = new GraphNode(transform.position, Vector3.Distance(global_goal_position, transform.position));
-		search.initialize(graph, start, goal);
-		path = search.update(graph, start, goal);
-		Debug.Log("Time after: " + Time.deltaTime);
-
-		for(int i = 0; i < path.Count; i++)
-		{
-			Debug.Log("Path " + i + ": (" + path[i].position.x + ", " + path[i].position.y + 
-				", " + path[i].position.z + ")");
-		}
-
-
-
 
 		calculate_avoidance_forces();
 	}
@@ -152,7 +164,7 @@ public class Crowd : MonoBehaviour
 					RaycastHit hit;
 
 					if(!Physics.SphereCast(graph[i].position, agent_radius,
-										(node_position - graph[i].position).normalized,
+										(node_position - graph[j].position).normalized,
 										out hit))
 					{
 						graph[i].neighbours.Add(graph[j]);
@@ -176,25 +188,8 @@ public class Crowd : MonoBehaviour
 			
 			for(int j = 0; j < graph[i].neighbours.Count; j++)
 			{
-				Debug.Log("Neighbour " + i + ": " + graph[i].neighbours[j].position);
+				Debug.Log("\tNeighbour " + j + ": " + graph[i].neighbours[j].position);
 			}
 		}
 	}
 }
-
-
-/*
-	Identifies:
-		TV monitor
-		TV stand
-		Blue barrel: 2
-		Red barrel: 4
-		Fir tree: 2
-
-	Comments:
-		In a featureless gray room
-
-		Interactive Virtual Materials
-Matthias Muller Markus Gross	
-
- */

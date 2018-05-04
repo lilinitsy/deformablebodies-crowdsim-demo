@@ -9,7 +9,7 @@ public class LPAStarSearch
 	public GraphNode goal;
 	public GraphQueue path;
 	public GraphQueue explored;
-	public PriorityQueue fringe;
+	public PriorityQueue fringe;	
 
 	public LPAStarSearch()
 	{
@@ -33,23 +33,21 @@ public class LPAStarSearch
 
 	public void compute_shortest_path()
 	{
-		path.child.Clear();
-		path.parent.Clear();
+	//	path.child.Clear();
+	//	path.parent.Clear();
 		goal.calculate_key();
 		// refer to calculate key for instructions on how to compare if a key is less than another.
 
-		// so this is copying correctly
-		Debug.Log("Compute shortest path graph neighbours: " + graph[0].neighbours.Count);
 
 		while(fringe.child[0].key.x < goal.key.x || 
 			(fringe.child[0].key.x == goal.key.x && 
-				(fringe.child[0].key.y <= goal.key.y)) ||
+				(fringe.child[0].key.y < goal.key.y)) ||
 		 	goal.rhs != goal.g) 
 		{
 			GraphNode current = fringe.child[0];
 			path.push(fringe.child[0], fringe.parent[0]);
 			
-			if(fringe.child.Count > 1	) // k...
+			if(fringe.child.Count > 1) // k...
 			{			
 				fringe.pop();
 			}
@@ -72,14 +70,15 @@ public class LPAStarSearch
 
 			for(int i = 0; i < current.neighbours.Count; i++)
 			{
-				GraphNode neighbour = current.neighbours[i];
-				update_vertex(ref neighbour, current);
-				current.neighbours[i] = neighbour;
+				// GraphNode neighbour = current.neighbours[i];
+				// update_vertex(ref neighbour, current);
+				// current.neighbours[i] = neighbour;
+				update_vertex(current.neighbours[i], current);
 			}
 		}
 	}
 
-	public void update_vertex(ref GraphNode node, GraphNode parent)
+	public void update_vertex(GraphNode node, GraphNode parent)
 	{
 		if(node != start)
 		{
@@ -87,8 +86,7 @@ public class LPAStarSearch
 
 			for(int i = 0; i < node.neighbours.Count; i++)
 			{
-				float tmp_rhs = node.neighbours[i].g + 
-								Vector2.Distance(node.position, node.neighbours[i].position);
+				float tmp_rhs = node.neighbours[i].g + Vector2.SqrMagnitude(node.position - node.neighbours[i].position);
 				if(tmp_rhs < min_rhs)
 				{
 					min_rhs = tmp_rhs;
@@ -110,7 +108,7 @@ public class LPAStarSearch
 	}
 
 	public void initialize(List<GraphNode> nodes, GraphNode s, GraphNode g)
-	{
+	{ /* 
 		graph.Clear();
 		fringe.child.Clear();
 		fringe.parent.Clear();
@@ -118,7 +116,7 @@ public class LPAStarSearch
 		path.parent.Clear();
 		explored.child.Clear();
 		explored.parent.Clear();
-
+*/
 		for(int i = 0; i < nodes.Count; i++)
 		{
 			if(nodes[i] != s && nodes[i] != g)
@@ -141,8 +139,7 @@ public class LPAStarSearch
 		graph.Add(start);
 		graph.Add(goal);
 		fringe.push(start, start);
-		fringe.push(goal, goal);
-		Debug.Log("Update called");
+		//fringe.push(goal, goal);
 		path.push(start, start);
 	}
 

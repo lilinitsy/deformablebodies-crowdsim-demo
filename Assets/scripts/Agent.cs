@@ -40,12 +40,12 @@ public class Agent : MonoBehaviour
         List<GraphNode> nodes = new List<GraphNode>();
         nodes.Add(new GraphNode(transform.position, Vector3.Distance(goal_position, transform.position)));
 
-        for(int i = 0; i < num_nodes - 1; i++)
+        for(int i = 0; i < num_nodes; i++)
         {
             Vector3 sample_point = new Vector3(
-                                        transform.position.x + vision_distance * Random.value, 
-                                        transform.position.y + vision_distance * Random.value, 
-                                        transform.position.z + vision_distance * Random.value);
+                                        transform.position.x + vision_distance * Random.value - 0.5f, 
+                                        transform.position.y + vision_distance * Random.value - 0.5f, 
+                                        transform.position.z + vision_distance * Random.value - 0.5f);
             RaycastHit hit;
 
             if(!Physics.SphereCast(transform.position, radius, 
