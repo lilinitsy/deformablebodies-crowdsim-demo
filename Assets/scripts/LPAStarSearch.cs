@@ -147,10 +147,11 @@ public class LPAStarSearch
 	private List<GraphNode> reconstruct_graph()
 	{
 		List<GraphNode> final_path = new List<GraphNode>();
-		for(int i = 0; i < path.child.Count; i++)
+		for(int i = 0; i < path.child.Count - 1; i++)
 		{
 			final_path.Add(path.child[i]);
 		}
+		final_path.Add(goal);
 		
 		return final_path;
 	}

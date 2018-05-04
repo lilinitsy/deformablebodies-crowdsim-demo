@@ -76,12 +76,25 @@ public class Crowd : MonoBehaviour
 
 		Debug.Log("Path length: " + path.Count);
 
+		// after calling initialize, this is right
+		// since only the path should be on the path.
+		// or uh, but it should only have 1 node...
+
 		for(int i = 0; i < path.Count; i++)
 		{
 			Debug.Log("Node in path: " + i);
 			Debug.Log("\t" + path[i].position.ToString("F8"));
 		}
 
+		Debug.Log("\n\n ON A NEW PART, CALLING UPDATE NOW");
+
+		path = search.update(graph, start, goal);
+		Debug.Log("Let's see how it works now...");
+for(int i = 0; i < path.Count; i++)
+		{
+			Debug.Log("Node in path: " + i);
+			Debug.Log("\t" + path[i].position.ToString("F8"));
+		}
 		/* 
 		for(int i = 0; i < graph.Count; i++)
 		{
