@@ -27,10 +27,9 @@ public class SoundDeformation : MonoBehaviour {
 
 	void Start() 
 	{
-		// before making the mesh, 
-		// get the vertices from all the child pointmasses or some shit
-		// Agent tmp_agent = Instantiate(agent_prefab, agent_position, Quaternion.identity) as Agent;
 		average_position = new Vector3(0, 0, 0);
+		new_vertices = new Vector3[width * height * depth];
+		new_uv = new Vector2[width * height * depth];
 
 		Mesh mesh = new Mesh();
 		GetComponent<MeshFilter>().mesh = mesh;
@@ -50,31 +49,28 @@ public class SoundDeformation : MonoBehaviour {
 
 	void Update() 
 	{
-		// Debug.Log("Fps: " + 1 / Time.deltaTime);
+		
+
 		Mesh mesh = GetComponent<MeshFilter>().mesh;
 		Vector3[] vertices = mesh.vertices;
 		Vector3[] normals = mesh.normals;
-
+		/*
 		for(int i = 0; i < vertices.Length; i++)
 		{
 			vertices[i] += normals[i] * Mathf.Sin(Time.time); // just to test
 		}
+		*/
+		int iterator = 0;
+		foreach(Transform child in transform)
+		{
+			vertices[iterator] = child.transform.position;
+		}
 
 		mesh.vertices = vertices;
-				
+
 		audio_source.GetSpectrumData(spectrum_samples, 0, FFTWindow.Rectangular);
 		frequency_groups = calculate_frequency_groups();
 		audio_source.transform.position = transform.position;
-
-		for(int i = 0; i < 512; i++)
-		{
-			/*
-				get the unit vector e
-					e = Vector3.Normalize(audio_source.transform.position - point_masslist[i])
-					do this in sound_deformation
-			 */
-		}
-
 		sound_deformation();
 	}
 
@@ -114,7 +110,7 @@ public class SoundDeformation : MonoBehaviour {
 	}
 
 	void sound_deformation()
-	{
+	{ /*
 		for(int i = 0; i < width; i++)
 		{
 			for(int j = 0; j < height; j++)
@@ -128,7 +124,141 @@ public class SoundDeformation : MonoBehaviour {
 					point_mass[i, j, k].position = anchor_points[i, j, k] + e * length * frequency_groups[0];
 				}
 			}
-		} 
+		} */ 
+
+		/*
+			Might need to add some randomness to the direction vector
+				e, or a sin-type cycle
+		*/
+
+
+		// octant 0: lower front left
+		for(int i = 0; i < width / 2; i++)
+		{
+			for(int j = 0; j < height / 2; j++)
+			{
+				for(int k = 0; k < depth / 2; k++)
+				{
+					Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+					float length = Vector3.Magnitude(e);
+					e.Normalize();
+
+					point_mass[i, j, k].position = anchor_points[i, j, k] + e * length * frequency_groups[0];
+				}
+			}
+		}
+
+		// octant 1, back lower left
+		for(int i = 0; i < width / 2; i++)
+		{
+			for(int j = 0; j < height / 2; j++)
+			{
+				for(int k = depth / 2; k < depth; k++)
+				{
+					Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+					float length = Vector3.Magnitude(e);
+					e.Normalize();
+
+					point_mass[i, j, k].position = anchor_points[i, j, k] + e * length * frequency_groups[1];
+				}
+			}
+		}
+
+		// octant 2, front lower right
+		for(int i = width / 2; i < width; i++)
+		{
+			for(int j = 0; j < height / 2; j++)
+			{
+				for(int k = 0; k < depth / 2; k++)
+				{
+					Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+					float length = Vector3.Magnitude(e);
+					e.Normalize();
+
+					point_mass[i, j, k].position = anchor_points[i, j, k] + e * length * frequency_groups[2];
+				}
+			}
+		}
+
+		// octant 3, back lower right
+		for(int i = width / 2; i < width; i++)
+		{
+			for(int j = 0; j < height / 2; j++)
+			{
+				for(int k = depth / 2; k < depth; k++)
+				{
+					Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+					float length = Vector3.Magnitude(e);
+					e.Normalize();
+
+					point_mass[i, j, k].position = anchor_points[i, j, k] + e * length * frequency_groups[3];
+				}
+			}
+		}
+
+		// octant 4, front top left
+		for(int i = 0; i < width / 2; i++)
+		{
+			for(int j = height / 2; j < height; j++)
+			{
+				for(int k = 0; k < depth / 2; k++)
+				{
+					Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+					float length = Vector3.Magnitude(e);
+					e.Normalize();
+
+					point_mass[i, j, k].position = anchor_points[i, j, k] + e * length * frequency_groups[4];
+				}
+			}
+		}
+
+		// octant 5, back top left
+		for(int i = 0; i < width / 2; i++)
+		{
+			for(int j = height / 2; j < height; j++)
+			{
+				for(int k = depth / 2; k < depth; k++)
+				{
+					Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+					float length = Vector3.Magnitude(e);
+					e.Normalize();
+
+					point_mass[i, j, k].position = anchor_points[i, j, k] + e * length * frequency_groups[5];
+				}
+			}
+		}
+
+		// octant 6, front lower right
+		for(int i = width / 2; i < width; i++)
+		{
+			for(int j = height / 2; j < height; j++)
+			{
+				for(int k = 0; k < depth / 2; k++)
+				{
+					Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+					float length = Vector3.Magnitude(e);
+					e.Normalize();
+
+					point_mass[i, j, k].position = anchor_points[i, j, k] + e * length * frequency_groups[6];
+				}
+			}
+		}
+
+		// octant 7, back lower right
+		for(int i = width / 2; i < width; i++)
+		{
+			for(int j = height / 2; j < height; j++)
+			{
+				for(int k = depth / 2; k < depth; k++)
+				{
+					Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+					float length = Vector3.Magnitude(e);
+					e.Normalize();
+
+					point_mass[i, j, k].position = anchor_points[i, j, k] + e * length * frequency_groups[7];
+				}
+			}
+		}
 	}
 	
 	private float[] calculate_frequency_groups()

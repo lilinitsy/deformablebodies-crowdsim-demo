@@ -40,7 +40,7 @@ Also might want to consider Implicit Euler instead.
 	// Use this for initialization
 	void Start() 
 	{
-				Debug.Log("-: " + -1 * width / 2);
+		Debug.Log("-: " + -1 * width / 2);
 		Debug.Log("+: " + width / 2);
 
 		transform.position = position;
