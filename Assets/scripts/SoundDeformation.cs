@@ -22,9 +22,8 @@ public class SoundDeformation : MonoBehaviour {
 	public float[] spectrum_samples;
 	private float[] frequency_groups;
 	private List<PointMass> point_mass_list;
-	private PointMass[ , , ] tmp_intermediate_pointmass;
-	private PointMass[ , , ] old_pointmass;
 	private PointMass[ , , ] point_mass;
+	private Vector3[ , ,] anchor_points;
 
 	void Start() 
 	{
@@ -40,9 +39,8 @@ public class SoundDeformation : MonoBehaviour {
 		mesh.triangles = new_triangles;
 
 		point_mass_list = new List<PointMass>();
-		tmp_intermediate_pointmass = new PointMass[width, height, depth];
-		old_pointmass = new PointMass[width, height, depth];
 		point_mass = new PointMass[width, height, depth];
+		anchor_points = new Vector3[width, height, depth];
 
 		spectrum_samples = new float[512];
 		frequency_groups = new float[8];
@@ -77,8 +75,17 @@ public class SoundDeformation : MonoBehaviour {
 
 		average_position /= width * height * depth;
 		gameObject.transform.GetChild(0).transform.position = average_position;
-
-		// like cloth now...
+		
+		audio_source.GetSpectrumData(spectrum_samples, 0, FFTWindow.Rectangular);
+		frequency_groups = calculate_frequency_groups();
+		
+		for(int i = 0; i < 512; i++)
+		{
+			/*
+				get the unit vector e
+					e = Vector3.Normalize(audio_source.transform.position - point_masslist[i])
+			 */
+		}
 
 		sound_deformation();
 	}
@@ -110,9 +117,8 @@ public class SoundDeformation : MonoBehaviour {
 			{
 				for(int k = 0; k < depth; k++)
 				{
-					tmp_intermediate_pointmass[i, j, k] = point_mass_list[pm_count];
-					old_pointmass[i, j, k] = point_mass_list[pm_count];
 					point_mass[i, j, k] = point_mass_list[pm_count];
+					anchor_points[i, j, k] = point_mass_list[pm_count].position;
 					pm_count++;
 				}
 			}
@@ -121,7 +127,49 @@ public class SoundDeformation : MonoBehaviour {
 
 	void sound_deformation()
 	{
-		
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height; j++)
+			{
+				for(int k = 0; k < width; k++)
+				{
+					Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+					float length = Vector3.Magnitude(e);
+					e.Normalize();
+
+					point_mass[i, j, k].position = anchor_points[i, j, k] + e * length * frequency_groups[0];
+				}
+			}
+		} 
+	}
+	
+	private float[] calculate_frequency_groups()
+	{
+		float[] f_group = new float[8];
+		int count = 0;
+
+		for(int i = 0; i < f_group.Length; i++)
+		{
+			float average = 0;
+			int sample_count = (int) Mathf.Pow(2, i) * 2;
+
+			if(i == 3)
+			{
+				sample_count += 2;
+			}
+
+			for(int j = 0; j < sample_count; j++)
+			{
+				average += spectrum_samples[count] * (count + 1);
+				count++;
+			}
+
+			average /= count;
+			f_group[i] = average * 10;
+		}
+
+
+		return f_group;
 	}
 
 }
