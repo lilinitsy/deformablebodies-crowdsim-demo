@@ -36,6 +36,7 @@ public class Agent : MonoBehaviour
 
     public List<GraphNode> sample_points(int num_nodes, Vector3 goal_position)
     {
+		//transform.eulerAngles = goal_position - transform.position;
         List<GraphNode> nodes = new List<GraphNode>();
         nodes.Add(new GraphNode(transform.position, Vector3.Distance(goal_position, transform.position)));
 

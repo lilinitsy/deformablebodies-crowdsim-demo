@@ -51,8 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4a49404ee3b90b489912355bef6c049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent_prefab: {fileID: 0}
   agents: []
   number_agents_to_spawn: 3
+  num_nodes_sample: 0
   vision_distance: 20
-  agent_radius: 2
+  agent_radius: 10
   random_distance_for_agent_spawns: 2
+  global_goal_position: {x: 0, y: 0, z: 0}
