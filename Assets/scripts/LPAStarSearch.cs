@@ -33,8 +33,8 @@ public class LPAStarSearch
 
 	public void compute_shortest_path()
 	{
-	//	path.child.Clear();
-	//	path.parent.Clear();
+		path.child.Clear();
+		path.parent.Clear();
 		goal.calculate_key();
 		// refer to calculate key for instructions on how to compare if a key is less than another.
 
@@ -151,7 +151,6 @@ public class LPAStarSearch
 		{
 			final_path.Add(path.child[i]);
 		}
-		final_path.Add(goal);
 		
 		return final_path;
 	}
