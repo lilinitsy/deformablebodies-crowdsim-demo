@@ -191,7 +191,7 @@ public class Star : MonoBehaviour {
     public Vector3 rotationRates = new Vector3(0, -1, 0);   //Since the texture for a star is based off of 3d noise, we can rotate the entire thing
     private Vector3 actualRotation = new Vector3(0, 0, 0);   //Since the texture for a star is based off of 3d noise, we can rotate the entire thing
 
-    public Color baseStarColor = Color.white;
+	public Color baseStarColor = Color.yellow;
 
     public GameObject[] coronaStrips;   //A list of all corona objects
 
@@ -217,7 +217,7 @@ public class Star : MonoBehaviour {
 
         //Set light properties
         if (GetComponentInChildren<Light>() != null)
-            GetComponentInChildren<Light>().color = GetColor();
+			GetComponentInChildren<Light>().color = HexCodeToColor(colorLookup[35]);
 
         //Handle pauses
         if (!GetIsPaused()) {
@@ -226,7 +226,7 @@ public class Star : MonoBehaviour {
         }
 
         //Set star properties
-        mpb.SetColor("_StarColor", GetColor());
+        //mpb.SetColor("_StarColor", GetColor());
         mpb.SetVector("_StarCenter", new Vector4(transform.position.x, transform.position.y, transform.position.z, transform.lossyScale.x / 2f));
         mpb.SetVector("_RotRate", new Vector4(actualRotation.x, actualRotation.y, actualRotation.z, 0));
         mpb.SetFloat("_LocalTime", localTime);
