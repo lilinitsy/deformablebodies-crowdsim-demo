@@ -15,6 +15,7 @@ public class SoundDeformation : MonoBehaviour {
 
 	public float rest_length;
 	public float dt;
+	public float k_dampening;
 	public int width; // x
 	public int height; // y
 	public int depth; // z
@@ -23,7 +24,8 @@ public class SoundDeformation : MonoBehaviour {
 	private float[] frequency_groups;
 	private List<PointMass> point_mass_list;
 	private PointMass[ , , ] point_mass;
-	private Vector3[ , ,] anchor_points;
+	private Vector3[ , , ] old_point_mass_positions;
+	private Vector3[ , , ] anchor_points;
 
 
 	void Start() 
@@ -40,6 +42,7 @@ public class SoundDeformation : MonoBehaviour {
 
 		point_mass_list = new List<PointMass>();
 		point_mass = new PointMass[width, height, depth];
+		old_point_mass_positions = new Vector3[width, height, depth];
 		anchor_points = new Vector3[width, height, depth];
 
 		spectrum_samples = new float[512];
@@ -50,7 +53,16 @@ public class SoundDeformation : MonoBehaviour {
 
 	void Update() 
 	{
-		
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height; j++)
+			{
+				for(int k = 0; k < depth; k++)
+				{
+					old_point_mass_positions[i, j, k] = point_mass[i, j, k].position;
+				}
+			}
+		}
 
 		Mesh mesh = GetComponent<MeshFilter>().mesh;
 		Vector3[] vertices = mesh.vertices;
@@ -119,7 +131,7 @@ public class SoundDeformation : MonoBehaviour {
 			{
 				for(int k = 0; k < depth / 2; k++)
 				{
-					if(frequency_groups[0] > 0.2f)
+					if(frequency_groups[0] > 0.15f)
 					{
 						Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
 						float length = Vector3.Magnitude(e);
@@ -284,7 +296,7 @@ public class SoundDeformation : MonoBehaviour {
 				}
 			}
 		}
-
+		
 		
 		// octant 7, back lower right
 		for(int i = width / 2; i < width; i++)
@@ -306,6 +318,23 @@ public class SoundDeformation : MonoBehaviour {
 					{
 						point_mass[i, j, k].position = anchor_points[i, j, k];
 					}
+				}
+			}
+		}
+
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height; j++)
+			{
+				for(int k = 0; k < depth; k++)
+				{
+					Vector3 e = audio_source.transform.position - old_point_mass_positions[i, j, k];
+					float l = Vector3.Magnitude(e);
+					e.Normalize();
+					float v1 = Vector3.Dot(e, anchor_points[i, j, k]);
+					float v2 = Vector3.Dot(e, point_mass[i, j, k].position);
+					float force = -1.0f * k_dampening * (v1 - v2);
+					point_mass[i, j, k].position += e * (Time.deltaTime * Time.deltaTime);
 				}
 			}
 		} 
@@ -333,7 +362,7 @@ public class SoundDeformation : MonoBehaviour {
 			}
 
 			average /= count;
-			f_group[i] = average * 2;
+			f_group[i] = average;
 		}
 
 
