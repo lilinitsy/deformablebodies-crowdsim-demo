@@ -2970,6 +2970,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114646022597624596, guid: 79047f56f313bb248ac4cea43d6ea56a,
+        type: 2}
+      propertyPath: agents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4715276092033860, guid: 79047f56f313bb248ac4cea43d6ea56a, type: 2}
       propertyPath: m_LocalPosition.x
       value: 300

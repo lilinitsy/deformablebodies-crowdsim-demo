@@ -43,21 +43,16 @@ public class Agent : MonoBehaviour
         for(int i = 0; i < num_nodes; i++)
         {
             Vector3 sample_point = new Vector3(
-                                        transform.position.x + vision_distance * Random.value - 0.5f, 
-                                        transform.position.y + vision_distance * Random.value - 0.5f, 
-                                        transform.position.z + vision_distance * Random.value - 0.5f);
+                                        transform.position.x + vision_distance * (Random.value - 0.5f), 
+                                        transform.position.y + vision_distance * (Random.value - 0.5f), 
+                                        transform.position.z + vision_distance * (Random.value - 0.5f));
             RaycastHit hit;
 
             if(!Physics.SphereCast(transform.position, radius, 
-                                (transform.position - sample_point).normalized,
+                                (sample_point - transform.position).normalized,
                                 out hit, vision_distance))
             {
                 nodes.Add(new GraphNode(sample_point, Vector3.Distance(goal_position, sample_point)));
-            }
-
-            else
-            {
-                i--;
             }
 
             // I don't think I need a for(int i = 0; i< obstacles.size(); i++) loop

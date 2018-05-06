@@ -2,87 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PriorityQueue 
+public class PriorityQueue
 {
-	// child[0] will have parent[0]
-	// child[n] will have parent[n]
 	public List<GraphNode> child;
 	public List<GraphNode> parent;
-
+	public List<float> gscore;
+	public List<float> fscore;
+	// Use this for initialization
 	public PriorityQueue()
 	{
 		child = new List<GraphNode>();
 		parent = new List<GraphNode>();
+		gscore = new List<float>();
+		fscore = new List<float>();
 	}
 
-	public void push(GraphNode c, GraphNode p)
+	public void push(GraphNode c, GraphNode p, float g, float w)
 	{
-		float key1 = c.key.x;
-		float key2 = c.key.y;
-		Vector2 key = new Vector2(key1, key2);
+		float f = g + w * c.heuristic;
 
-		
-
-		// For each node, compare based on the LPA* key guidelines
 		for(int i = 0; i < child.Count; i++)
 		{
-			if(key.x < child[i].key.x ||
-				(key.x == child[i].key.x &&
-				key.y < child[i].key.y))
+			if(f < fscore[i])
 			{
-				parent.Insert(i, p);
-				child.Insert(i, c);
+				child.Add(c);
+				parent.Add(p);
+				gscore.Add(g);
+				fscore.Add(f);
 				return;
 			}
 		}
-
-		if(child.Count == 0)
-		{
-			parent.Insert(0, p);
-			child.Insert(0, c);
-			return;
-		}
-
-		/*
-			If it needs to be inserted at the end, insert
-			at count - 1 to alias as the end
-		*/
-		int count = child.Count;
-		child.Insert(count - 1, c);
-		parent.Insert(count - 1, p);
+		child.Add(c);
+		parent.Add(p);
+		gscore.Add(g);
+		fscore.Add(f);
 	}
 
 	public void pop()
 	{
-		parent.RemoveAt(0);
 		child.RemoveAt(0);
-	}
-
-	public void remove(GraphNode n)
-	{
-		/* 
-			can't really use built-in list remove/remove_at
-			because I have to do it with two lists
-
-			Could maybe just use Remove? but I need to get the parent
-			index, and the built-ins are all voids
-		*/
-
-		for(int i = 0; i < child.Count; i++)
-		{
-			if(n == child[i])
-			{
-				parent.RemoveAt(i);
-				child.RemoveAt(i);
-			}
-		}
+		parent.RemoveAt(0);
+		gscore.RemoveAt(0);
+		fscore.RemoveAt(0);
 	}
 
 	public bool node_in_queue(GraphNode n)
 	{
-		if(child.Contains(n))
+		for(int i = 0; i < child.Count; i++)
 		{
-			return true;
+			if(n == child[i])
+			{
+				return true;
+			}
 		}
 
 		return false;
