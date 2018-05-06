@@ -46,10 +46,10 @@ public class DynamicWeightingAStarSearch
 			if(explored.child.Count == graph.Count - 1)
 			{
 				Debug.Log("explored.child.Count was 1 less than graph size?");
-				if(path.child[path.child.Count - 1] != start)
-				{
+			//	if(path.child[path.child.Count - 1] != start)
+			//	{
 					path.push(fringe.child[0], fringe.parent[0], current_g, weight);
-				}
+			//	}
 			
 				return reconstruct_path(path);
 			}
