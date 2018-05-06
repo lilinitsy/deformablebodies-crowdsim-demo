@@ -38,26 +38,22 @@ public class Agent : MonoBehaviour
     {
 		//transform.eulerAngles = goal_position - transform.position;
         List<GraphNode> nodes = new List<GraphNode>();
-        nodes.Add(new GraphNode(transform.position, Vector3.Distance(goal_position, transform.position)));
+        nodes.Add(new GraphNode(transform.position, Vector3.Magnitude(goal_position - transform.position)));
 
         for(int i = 0; i < num_nodes; i++)
         {
             Vector3 sample_point = new Vector3(
-                                        transform.position.x + vision_distance * (Random.value - 0.5f), 
-                                        transform.position.y + vision_distance * (Random.value - 0.5f), 
-                                        transform.position.z + vision_distance * (Random.value - 0.5f));
+                                        transform.position.x + vision_distance * (Random.value), 
+                                        transform.position.y + vision_distance * (Random.value), 
+                                        transform.position.z + vision_distance * (Random.value));
             RaycastHit hit;
 
             if(!Physics.SphereCast(transform.position, radius, 
                                 (sample_point - transform.position).normalized,
                                 out hit, vision_distance))
             {
-                nodes.Add(new GraphNode(sample_point, Vector3.Distance(goal_position, sample_point)));
+                nodes.Add(new GraphNode(sample_point, Vector3.Magnitude(goal_position - sample_point)));
             }
-
-            // I don't think I need a for(int i = 0; i< obstacles.size(); i++) loop
-            // because Physics.RayCast does this shit for us? 
-            // If I do need it, add List<Collider> obstacles as a parameter.
         }
         
         return nodes;

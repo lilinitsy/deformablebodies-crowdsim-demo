@@ -5,10 +5,9 @@ using UnityEngine;
 public class DynamicWeightingAStarSearch
 { 
 	public float default_weight;
-	public List<GraphNode> graph;
 	public DynamicWeightingAStarSearch()
 	{
-		graph = new List<GraphNode>();
+
 	}
 
 	public List<GraphNode> find_path(List<GraphNode> graph, GraphNode start, GraphNode goal)
@@ -21,9 +20,8 @@ public class DynamicWeightingAStarSearch
 
 		while(fringe.child.Count > 0)
 		{
-			Debug.Log("Pass of weighted A*");
 			GraphNode current = fringe.child[0];
-			float current_g = fringe.gscore[0];
+			float current_g = fringe.gscore[0]; // mothafucka this is always 0
 			float weight = calculate_weight();
 
 			if(current == goal)
@@ -43,16 +41,16 @@ public class DynamicWeightingAStarSearch
 				as it doesn't end in the original node
 
 				If it does end in the original start node,
-				then use the next best
+				then use th	e next best
 			*/
 			if(explored.child.Count == graph.Count - 1)
 			{
 				Debug.Log("explored.child.Count was 1 less than graph size?");
-				if(path.child[path.child.Count - 1] == start)
+				if(path.child[path.child.Count - 1] != start)
 				{
 					path.push(fringe.child[0], fringe.parent[0], current_g, weight);
 				}
-
+			
 				return reconstruct_path(path);
 			}
 
@@ -62,7 +60,6 @@ public class DynamicWeightingAStarSearch
 
 			for(int i = 0; i < current.neighbours.Count; i++)
 			{
-
 				if(explored.node_in_queue(current.neighbours[i]))
 				{
 					continue;
@@ -75,10 +72,13 @@ public class DynamicWeightingAStarSearch
 					fringe.push(current.neighbours[i], current, g, weight);
 				}
 
+				Debug.Log("\t g: " + g + "\n\t current_g: " + current_g);
+
 				if(g < current_g)
 				{
 					if(path.node_in_queue(current.neighbours[i]))
 					{
+						Debug.Log("Parent swapping occurring");
 						path.swap_parent_of_child(current.neighbours[i], current);
 					}
 
@@ -119,6 +119,6 @@ public class DynamicWeightingAStarSearch
 
 	private float calculate_weight()
 	{
-		return 1.0f;
+		return 1.4f;
 	} 
 }

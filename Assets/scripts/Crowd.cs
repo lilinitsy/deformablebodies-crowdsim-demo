@@ -20,7 +20,7 @@ public class Crowd : MonoBehaviour
 	public int number_agents_to_spawn;
 	public int num_nodes_sample;
 	public float astar_weight;
-	
+	public float velocity;
 	public float vision_distance;
 	public float agent_radius;
 	public float random_distance_for_agent_spawns;
@@ -59,23 +59,20 @@ public class Crowd : MonoBehaviour
 
 		construct_graph(num_nodes_sample);
 		make_graph_neighbours(global_goal_position);
-
 		path = search.find_path(graph, start, goal); 
-		/*
-			find_path is computing a path
-			but path is just being filled with fucking empty shit
-		*/
 
 		Debug.Log("Path after search with size: " + path.Count);
 		for(int i = 0; i < path.Count; i++)
 		{
-			Debug.Log("\tPath " + i + ": " + path[i].position.ToString("F4"));
+		//	Debug.Log("\tPath " + i + ": " + path[i].position.ToString("F4"));
 		}
 	}
 	
 	// Update is called once per frame
 	void Update() 
     {
+		graph.Clear();
+		Debug.Log("Path 0 position: " + path[0].position.ToString("F3"));
 		Vector3 average_position = new Vector3(0.0f, 0.0f, 0.0f);
 		foreach(Transform child in transform)
 		{
@@ -83,18 +80,38 @@ public class Crowd : MonoBehaviour
 		}
 
 		average_position /= agents.Count;
-		start.position = average_position;
-	//	transform.position = average_position;
 		
-		for(int i = 0; i < graph.Count; i++)
+		for(int i = 0; i < path.Count - 1; i++)
 		{
-			for(int j = 0; j < graph[i].neighbours.Count; j++)
-			{
-				Debug.DrawRay(graph[i].position, graph[i].neighbours[j].position, Color.blue);
-			}
+			Debug.DrawLine(path[i].position, path[i + 1].position, Color.blue);
 		}
 
+		if(Vector3.Magnitude(average_position - path[0].position) < 0.2f && path.Count > 1)
+		{
 
+			Debug.Log("Removed!");
+			path.RemoveAt(0);
+		}
+
+		if(path.Count > 1)
+		{
+			smooth_path();
+		}
+
+		if(path.Count > 0)
+		{
+			Vector3 heading = path[0].position - average_position;
+			transform.position += velocity * heading * Time.deltaTime;
+		}
+
+		if(path.Count == 1 && !path.Contains(goal))
+		{
+			construct_graph(num_nodes_sample);
+			make_graph_neighbours(global_goal_position);
+			start.position = transform.position;
+			start.heuristic = Vector3.Magnitude(transform.position - global_goal_position);
+			path = search.find_path(graph, start, goal); 
+		}
 
 		calculate_avoidance_forces();
 	}
@@ -139,6 +156,16 @@ public class Crowd : MonoBehaviour
 		}
 	}
 
+	
+	private void smooth_path()
+	{
+		if(can_see(path[0]))
+		{
+			path.RemoveAt(0);
+			return;
+		}
+	} 
+
 	// TODO: if time
 	private void calculate_avoidance_forces()
 	{
@@ -157,4 +184,23 @@ public class Crowd : MonoBehaviour
 			}
 		}
 	}
+
+	private bool can_see(GraphNode node_in_path)
+	{
+		RaycastHit hit;
+		if(Physics.SphereCast(transform.position, agent_radius,
+										(node_in_path.position - transform.position).normalized,
+										out hit))
+		{
+			return false;
+		}
+
+		return true;
+	}
 }
+
+/*
+if(!Physics.SphereCast(graph[i].position, agent_radius,
+										(graph[j].position - node_position).normalized,
+										out hit))
+ */
