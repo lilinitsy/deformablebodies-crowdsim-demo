@@ -26,10 +26,12 @@ public class Crowd : MonoBehaviour
 	public float random_distance_for_agent_spawns;
 	public Vector3 global_goal_position;
 
+	public DynamicWeightingAStarSearch search;
+
 	private GraphNode goal;
+	private GraphNode start;
 	private List<GraphNode> graph;
 	private List<GraphNode> path;	
-	private DynamicWeightingAStarSearch search;
 
 	// Use this for initialization
 	void Start() 
@@ -38,6 +40,7 @@ public class Crowd : MonoBehaviour
 		graph = new List<GraphNode>();
 		path = new List<GraphNode>();
 		goal = new GraphNode(global_goal_position, 0.0f);
+		start = new GraphNode(transform.position, Vector3.Magnitude(transform.position - global_goal_position));
 		search = new DynamicWeightingAStarSearch();
 		search.default_weight = astar_weight;
 
@@ -56,29 +59,18 @@ public class Crowd : MonoBehaviour
 
 		construct_graph(num_nodes_sample);
 		make_graph_neighbours(global_goal_position);
-		
-		Debug.Log("Path to begin with size: " + path.Count);
+
+		path = search.find_path(graph, start, goal); 
+		/*
+			find_path is computing a path
+			but path is just being filled with fucking empty shit
+		*/
+
+		Debug.Log("Path after search with size: " + path.Count);
 		for(int i = 0; i < path.Count; i++)
 		{
-			Debug.Log("Path " + i + ": " + path[0].position.ToString("F4"));
+			Debug.Log("\tPath " + i + ": " + path[i].position.ToString("F4"));
 		}
-
-		GraphNode start = new GraphNode(transform.position, Vector2.Distance(transform.position, goal.position));
-		search.graph = graph;
-
-		path = search.find_path(start, goal);
-
-		Debug.Log("Path after with size: " + path.Count);
-		for(int i = 0; i < path.Count; i++)
-		{
-			Debug.Log("Path " + i + ": " + path[0].position.ToString("F4"));
-		}
-
-		for(int i = 0; i < search.graph.Count; i++)
-		{
-			Debug.Log("search Graph position " + search.graph[i].position.ToString("F4") +
-						" neighbour num: " + search.graph[i].neighbours.Count);
-		} 
 	}
 	
 	// Update is called once per frame
@@ -91,6 +83,7 @@ public class Crowd : MonoBehaviour
 		}
 
 		average_position /= agents.Count;
+		start.position = average_position;
 	//	transform.position = average_position;
 		
 		for(int i = 0; i < graph.Count; i++)
@@ -119,7 +112,6 @@ public class Crowd : MonoBehaviour
 			}
 		}
 
-		GraphNode start = new GraphNode(transform.position, Vector2.Distance(transform.position, goal.position));
 		graph.Add(start);
 		graph.Add(goal);
 	}
