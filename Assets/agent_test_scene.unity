@@ -414,7 +414,7 @@ Prefab:
     - target: {fileID: 114646022597624596, guid: 79047f56f313bb248ac4cea43d6ea56a,
         type: 2}
       propertyPath: global_goal_position.z
-      value: 4
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 114646022597624596, guid: 79047f56f313bb248ac4cea43d6ea56a,
         type: 2}
@@ -424,7 +424,7 @@ Prefab:
     - target: {fileID: 114646022597624596, guid: 79047f56f313bb248ac4cea43d6ea56a,
         type: 2}
       propertyPath: num_nodes_sample
-      value: 12
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 114646022597624596, guid: 79047f56f313bb248ac4cea43d6ea56a,
         type: 2}
