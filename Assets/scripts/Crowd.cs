@@ -61,10 +61,10 @@ public class Crowd : MonoBehaviour
 		make_graph_neighbours(global_goal_position);
 		path = search.find_path(graph, start, goal); 
 
-		Debug.Log("Path after search with size: " + path.Count);
+		//Debug.Log("Path after search with size: " + path.Count);
 		for(int i = 0; i < path.Count; i++)
 		{
-		//	Debug.Log("\tPath " + i + ": " + path[i].position.ToString("F4"));
+		//	//Debug.Log("\tPath " + i + ": " + path[i].position.ToString("F4"));
 		}
 	}
 	
@@ -72,7 +72,7 @@ public class Crowd : MonoBehaviour
 	void Update() 
     {
 		graph.Clear();
-		Debug.Log("Path 0 position: " + path[0].position.ToString("F3"));
+		//Debug.Log("Path 0 position: " + path[0].position.ToString("F3"));
 		Vector3 average_position = new Vector3(0.0f, 0.0f, 0.0f);
 		foreach(Transform child in transform)
 		{
@@ -83,13 +83,13 @@ public class Crowd : MonoBehaviour
 		
 		for(int i = 0; i < path.Count - 1; i++)
 		{
-			Debug.DrawLine(path[i].position, path[i + 1].position, Color.blue);
+			//Debug.DrawLine(path[i].position, path[i + 1].position, Color.blue);
 		}
 
 		if(Vector3.Magnitude(average_position - path[0].position) < 0.2f && path.Count > 1)
 		{
 
-			Debug.Log("Removed!");
+			//Debug.Log("Removed!");
 			path.RemoveAt(0);
 		}
 
@@ -176,11 +176,11 @@ public class Crowd : MonoBehaviour
 	{
 		for(int i = 0; i < graph.Count; i++)
 		{
-			Debug.Log("graph " + i + ": " + graph[i].position);
+			//Debug.Log("graph " + i + ": " + graph[i].position);
 			
 			for(int j = 0; j < graph[i].neighbours.Count; j++)
 			{
-				Debug.Log("\tNeighbour " + j + ": " + graph[i].neighbours[j].position);
+				//Debug.Log("\tNeighbour " + j + ": " + graph[i].neighbours[j].position);
 			}
 		}
 	}

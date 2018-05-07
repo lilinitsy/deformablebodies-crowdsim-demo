@@ -10,7 +10,7 @@ public class LaserBehavior : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		transform.Rotate (90, 0, 0);
-		speed = transform.localPosition.y + 0.5f;
+		speed = transform.localPosition.y + 0.2f;
 		transform.localPosition = new Vector3(transform.localPosition.x, 0, transform.localPosition.z);
 		transform.parent = null;
 	}
@@ -23,5 +23,12 @@ public class LaserBehavior : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
+
+	void OnCollisionEnter(Collision collision)
+	{
+		Debug.Log (collision.collider.name);
+		if (collision.collider.name == "Jelly1") {
+			//Destroy(gameObject);
+		}
+	}
 }
- 

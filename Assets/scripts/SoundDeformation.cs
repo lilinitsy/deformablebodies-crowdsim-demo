@@ -268,7 +268,7 @@ public class SoundDeformation : MonoBehaviour {
 
 
 
-		Debug.Log("Audio source local position: " + audio_source.transform.localPosition.ToString("F3"));
+		//Debug.Log("Audio source local position: " + audio_source.transform.localPosition.ToString("F3"));
 
 		next_sound_update_time += Time.deltaTime;
 	}
@@ -597,5 +597,12 @@ public class SoundDeformation : MonoBehaviour {
 
 
 		return f_group;
+	}
+
+	void OnCollisionEnter(Collision collision)
+	{
+		if(collision.collider.name == "Projectile(Clone)") {
+			Destroy(gameObject);
+		}
 	}
 }
