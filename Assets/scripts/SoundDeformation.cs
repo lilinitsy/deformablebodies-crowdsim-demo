@@ -41,7 +41,7 @@ public class SoundDeformation : MonoBehaviour {
 
 		new_vertices = new Vector3[width * height * depth];
 		new_uv = new Vector2[width * height * depth];
-		new_triangles = new int[width * height * depth * 6];
+		new_triangles = new int[width * height * depth * 18 * 2];
 
 		point_mass_list = new List<PointMass>();
 		point_mass = new PointMass[width, height, depth];
@@ -102,25 +102,98 @@ public class SoundDeformation : MonoBehaviour {
 
 		// trying front face, k = 0;
 		iterator = 0;
+		/*for(int i = 0; i < width-1; i++)
+		{
+			for(int j = 0; j < height-1; j++)
+			{
+				new_triangles [iterator] = (j * width) + i;
+				new_triangles [iterator + 1] = (j * width) + i + width + 1; 
+				new_triangles [iterator + 2] = (j * width) + i + width;
+				new_triangles [iterator + 3] = (j * width) + i;
+				new_triangles [iterator + 4] = (j * width) + i + 1;
+				new_triangles [iterator + 5] = (j * width) + i + width + 1;
+				iterator += 6;
+				new_triangles [iterator] = ((depth-1)*width*height)+(j * width) + i;
+				new_triangles [iterator + 1] = ((depth-1)*width*height)+(j * width) + i + width;
+				new_triangles [iterator + 2] = ((depth-1)*width*height)+(j * width) + i + width + 1; 
+				new_triangles [iterator + 3] = ((depth-1)*width*height)+(j * width) + i;
+				new_triangles [iterator + 4] = ((depth-1)*width*height)+(j * width) + i + width + 1;
+				new_triangles [iterator + 5] = ((depth-1)*width*height)+(j * width) + i + 1;
+				iterator += 6;
+			}
+		}*/
 		for(int i = 0; i < width-1; i++)
 		{
 			for(int j = 0; j < height-1; j++)
 			{
-				for (int k = 0; k < depth; k++) 
+				for (int k = 0; k < depth-1; k++) 
 				{
-					new_triangles [iterator] = (k*width*height)+(j * width) + i;
-					new_triangles [iterator + 1] = (k*width*height)+(j * width) + i + width;
-					new_triangles [iterator + 2] = (k*width*height)+(j * width) + i + width + 1; 
-					new_triangles [iterator + 3] = (k*width*height)+(j * width) + i;
-					new_triangles [iterator + 4] = (k*width*height)+(j * width) + i + width + 1;
-					new_triangles [iterator + 5] = (k*width*height)+(j * width) + i + 1;
-					iterator += 6;
+					int index = (k * width * height) + (j * width) + i;
+					new_triangles [iterator] = index;
+					new_triangles [iterator + 1] = index + width + 1;
+					new_triangles [iterator + 2] = index + width;
+
+					new_triangles [iterator + 3] = index;
+					new_triangles [iterator + 4] = index + 1;
+					new_triangles [iterator + 5] = index + width + 1;
+
+					new_triangles [iterator + 6] = index;
+					new_triangles [iterator + 7] = index + (width*height);
+					new_triangles [iterator + 8] = index + (width*height) + 1;
+
+					new_triangles [iterator + 9] = index;
+					new_triangles [iterator + 10] = index + (width*height) + 1;
+					new_triangles [iterator + 11] = index + 1;
+
+					new_triangles [iterator + 12] = index;
+					new_triangles [iterator + 13] = index + (width*height) + width;
+					new_triangles [iterator + 14] = index + (width*height);
+
+					new_triangles [iterator + 15] = index;
+					new_triangles [iterator + 16] = index + width;
+					new_triangles [iterator + 17] = index + (width*height) + width;
+					iterator += 18;
+				}
+			}
+		}
+		for(int i = width-1; i > 0; i--)
+		{
+			for(int j = height-1; j > 0; j--)
+			{
+				for (int k = depth-1; k > 0; k--) 
+				{
+					int index = (k * width * height) + (j * width) + i;
+					new_triangles [iterator] = index;
+					new_triangles [iterator + 1] = index - width;
+					new_triangles [iterator + 2] = index - width - 1;
+
+					new_triangles [iterator + 3] = index;
+					new_triangles [iterator + 4] = index - width - 1;
+					new_triangles [iterator + 5] = index - 1;
+
+					new_triangles [iterator + 6] = index;
+					new_triangles [iterator + 7] = index - (width*height) - 1;
+					new_triangles [iterator + 8] = index - (width*height);
+
+					new_triangles [iterator + 9] = index;
+					new_triangles [iterator + 10] = index - 1;
+					new_triangles [iterator + 11] = index - (width*height) - 1;
+
+					new_triangles [iterator + 12] = index;
+					new_triangles [iterator + 13] = index - (width*height);
+					new_triangles [iterator + 14] = index - (width*height) - width;
+
+					new_triangles [iterator + 15] = index;
+					new_triangles [iterator + 16] = index - (width*height) - width;
+					new_triangles [iterator + 17] = index - width;
+					iterator += 18;
 				}
 			}
 		}
 
 		mesh.vertices = vertices;
 		mesh.triangles = new_triangles;
+		mesh.RecalculateNormals();
 
 		audio_source.GetSpectrumData(spectrum_samples, 0, FFTWindow.Rectangular);
 		audio_source.transform.position = transform.position;
