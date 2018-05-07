@@ -144,8 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5986db5147a61f49904ef2248f1cac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointmass_prefab: {fileID: 114351136587501322, guid: 9d398ad4122fcef4190da32c613047b1,
-    type: 2}
+  pointmass_prefab: {fileID: 0}
   audio_source: {fileID: 1440635464}
   audio_source2: {fileID: 0}
   audio_source3: {fileID: 0}
@@ -172,11 +171,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 235859715}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1661044589}
-  m_RootOrder: 0
+  m_Children:
+  - {fileID: 1440635465}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &235859718
 MeshRenderer:
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aadffaa9c673c84e9b2e9bfd411fa20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointmass_prefab: {fileID: 114351136587501322, guid: 9d398ad4122fcef4190da32c613047b1,
+  pointmass_prefab: {fileID: 114925882026570668, guid: 9d398ad4122fcef4190da32c613047b1,
     type: 2}
   audio_source: {fileID: 1440635464}
   rest_length: 0.1
@@ -255,8 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5293f1df9705db64eab65c17daba9248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointmass_prefab: {fileID: 114351136587501322, guid: 9d398ad4122fcef4190da32c613047b1,
-    type: 2}
+  pointmass_prefab: {fileID: 0}
   audio_source: {fileID: 1440635464}
   position: {x: 0, y: 0, z: 0}
   average_position: {x: 0, y: 0, z: 0}
@@ -265,7 +264,7 @@ MonoBehaviour:
   new_triangles: 
   rest_length: 0.1
   dt: 0
-  k_dampening: 0
+  k_dampening: 20
   width: 6
   height: 6
   depth: 6
@@ -447,8 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5293f1df9705db64eab65c17daba9248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointmass_prefab: {fileID: 114351136587501322, guid: 9d398ad4122fcef4190da32c613047b1,
-    type: 2}
+  pointmass_prefab: {fileID: 0}
   audio_source: {fileID: 1440635464}
   position: {x: 0, y: 0, z: 0}
   average_position: {x: 0, y: 0, z: 0}
@@ -473,8 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aadffaa9c673c84e9b2e9bfd411fa20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointmass_prefab: {fileID: 114351136587501322, guid: 9d398ad4122fcef4190da32c613047b1,
-    type: 2}
+  pointmass_prefab: {fileID: 0}
   audio_source: {fileID: 0}
   rest_length: 0.1
   dt: 0
@@ -539,8 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5986db5147a61f49904ef2248f1cac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointmass_prefab: {fileID: 114351136587501322, guid: 9d398ad4122fcef4190da32c613047b1,
-    type: 2}
+  pointmass_prefab: {fileID: 0}
   audio_source: {fileID: 1440635464}
   audio_source2: {fileID: 0}
   audio_source3: {fileID: 0}
@@ -571,7 +567,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1661044589}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1440635463
 GameObject:
@@ -584,7 +580,7 @@ GameObject:
   - component: {fileID: 1440635464}
   m_Layer: 0
   m_Name: Song1
-  m_TagString: Untagged
+  m_TagString: SoundSource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -676,11 +672,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1440635463}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 235859717}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1551357683
 Prefab:
@@ -789,7 +785,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 235859717}
   - {fileID: 1305472787}
   m_Father: {fileID: 0}
   m_RootOrder: 5

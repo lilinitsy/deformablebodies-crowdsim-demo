@@ -196,7 +196,7 @@ public class SoundDeformation : MonoBehaviour {
 		mesh.RecalculateNormals();
 
 		audio_source.GetSpectrumData(spectrum_samples, 0, FFTWindow.Rectangular);
-		audio_source.transform.position = transform.position;
+		audio_source.transform.localPosition = new Vector3(0, 0, 0);
 
 		if(next_sound_update_time < max_time_update / 2.0f)
 		{
@@ -255,6 +255,21 @@ public class SoundDeformation : MonoBehaviour {
 
 		sound_deformation();
 
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height; j++)
+			{
+				for(int k = 0; k < depth; k++)
+				{
+				//	point_mass[i, j, k].localPosition += transform.position;
+				}
+			}
+		}
+
+
+
+		Debug.Log("Audio source local position: " + audio_source.transform.localPosition.ToString("F3"));
+
 		next_sound_update_time += Time.deltaTime;
 	}
 
@@ -270,7 +285,7 @@ public class SoundDeformation : MonoBehaviour {
 											new Vector3(0, 0, 0),
 											Quaternion.identity) as PointMass;
 					point_mass.transform.parent = transform;
-					point_mass.position = new Vector3(2 * i * rest_length, 2 * j * rest_length, 2 * k * rest_length) + transform.position;
+					point_mass.position = new Vector3(2 * i * rest_length, 2 * j * rest_length, 2 * k * rest_length); // + transform.position;
 					point_mass.to_string();
 					point_mass_list.Add(point_mass);
 				}
@@ -336,6 +351,7 @@ public class SoundDeformation : MonoBehaviour {
 
 	private void sound_deformation()
 	{
+		 
 		// octant 0: lower front left
 		for(int i = 0; i < width / 2; i++)
 		{
@@ -345,7 +361,7 @@ public class SoundDeformation : MonoBehaviour {
 				{
 					if(frequency_groups[0] > 0.15f)
 					{
-						Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+						Vector3 e = anchor_points[i, j, k] - audio_source.transform.localPosition;
 						float length = Vector3.Magnitude(e);
 						e.Normalize();
 						float intensity_fudge = Random.Range(0.8f, 1.2f);
@@ -369,7 +385,7 @@ public class SoundDeformation : MonoBehaviour {
 				{
 					if(frequency_groups[1] > 0.2f)
 					{
-						Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+						Vector3 e = anchor_points[i, j, k] - audio_source.transform.localPosition;
 						float length = Vector3.Magnitude(e);
 						e.Normalize();
 						float intensity_fudge = Random.Range(0.8f, 1.2f);
@@ -394,7 +410,7 @@ public class SoundDeformation : MonoBehaviour {
 				{
 					if(frequency_groups[2] > 0.2f)
 					{
-						Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+						Vector3 e = anchor_points[i, j, k] - audio_source.transform.localPosition;
 						float length = Vector3.Magnitude(e);
 						e.Normalize();
 						float intensity_fudge = Random.Range(0.8f, 1.2f);
@@ -419,7 +435,7 @@ public class SoundDeformation : MonoBehaviour {
 				{
 					if(frequency_groups[3] > 0.2f)
 					{
-						Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+						Vector3 e = anchor_points[i, j, k] - audio_source.transform.localPosition;
 						float length = Vector3.Magnitude(e);
 						e.Normalize();
 						float intensity_fudge = Random.Range(0.8f, 1.2f);
@@ -444,7 +460,7 @@ public class SoundDeformation : MonoBehaviour {
 				{
 					if(frequency_groups[4] > 0.2f)
 					{
-						Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+						Vector3 e = anchor_points[i, j, k] - audio_source.transform.localPosition;
 						float length = Vector3.Magnitude(e);
 						e.Normalize();
 						float intensity_fudge = Random.Range(0.8f, 1.2f);
@@ -469,7 +485,7 @@ public class SoundDeformation : MonoBehaviour {
 				{
 					if(frequency_groups[5] > 0.2f)
 					{
-						Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+						Vector3 e = anchor_points[i, j, k] - audio_source.transform.localPosition;
 						float length = Vector3.Magnitude(e);
 						e.Normalize();
 						float intensity_fudge = Random.Range(0.8f, 1.2f);
@@ -494,7 +510,7 @@ public class SoundDeformation : MonoBehaviour {
 				{
 					if(frequency_groups[6] > 0.2f)
 					{
-						Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+						Vector3 e = anchor_points[i, j, k] - audio_source.transform.localPosition;
 						float length = Vector3.Magnitude(e);
 						e.Normalize();
 						float intensity_fudge = Random.Range(0.8f, 1.2f);
@@ -519,7 +535,7 @@ public class SoundDeformation : MonoBehaviour {
 				{
 					if(frequency_groups[7] > 0.2f)
 					{
-						Vector3 e = anchor_points[i, j, k] - audio_source.transform.position;
+						Vector3 e = anchor_points[i, j, k] - audio_source.transform.localPosition;
 						float length = Vector3.Magnitude(e);
 						e.Normalize();
 						float intensity_fudge = Random.Range(0.8f, 1.2f);
@@ -540,7 +556,7 @@ public class SoundDeformation : MonoBehaviour {
 			{
 				for(int k = 0; k < depth; k++)
 				{
-					Vector3 e = audio_source.transform.position - old_point_mass_positions[i, j, k];
+					Vector3 e = audio_source.transform.localPosition - old_point_mass_positions[i, j, k];
 					float l = Vector3.Magnitude(e);
 					e.Normalize();
 					float v1 = Vector3.Dot(e, anchor_points[i, j, k]);
@@ -550,14 +566,6 @@ public class SoundDeformation : MonoBehaviour {
 					float force = -1.0f * k_dampening * (v1 - v2);
 					
 					goal_position[i, j, k] += e * (Time.deltaTime * Time.deltaTime) * force;
-
-					/* 
-					if(v1 != v2)
-					{
-						Debug.Log("v1: " + v1);
-						Debug.Log("v2: " + v2);
-						Debug.Log("force: " + force.ToString("F8"));	
-					} */
 				}
 			}
 		} 
