@@ -10,6 +10,7 @@ public class DeformableBody : MonoBehaviour {
 	public AudioSource audio_source3;
 	public AudioSource audio_source4;
 
+	public Mesh mesh;
 	public Vector3 position;
 	public Vector3 average_position;
 	public Vector3[] new_vertices;
@@ -49,12 +50,6 @@ Also might want to consider Implicit Euler instead.
 // 			Agent tmp_agent = Instantiate(agent_prefab, agent_position, Quaternion.identity) as Agent;
 		average_position = new Vector3(0, 0, 0);
 
-		Mesh mesh = new Mesh();
-		GetComponent<MeshFilter>().mesh = mesh;
-		mesh.vertices = new_vertices;
-		mesh.uv = new_uv; // not gonna fuck with textures for now
-		mesh.triangles = new_triangles;
-
 		point_mass_list = new List<PointMass>();
 		tmp_intermediate_pointmass = new PointMass[width, height, depth];
 		old_pointmass = new PointMass[width, height, depth];
@@ -64,6 +59,13 @@ Also might want to consider Implicit Euler instead.
 		frequency_groups = new float[8];
 
 		init();
+
+		Mesh mesh = new Mesh();
+		GetComponent<MeshFilter>().mesh = mesh;
+		mesh.Clear();
+		mesh.vertices = new_vertices;
+		mesh.uv = new_uv;
+		mesh.triangles = new_triangles;
 	}
 	
 	// check out http://www.kaappine.fi/tutorials/using-microphone-input-in-unity3d/
@@ -71,17 +73,43 @@ Also might want to consider Implicit Euler instead.
 	// Thiiiiink the outtput data is what is needed... but not sure.
 	void Update() 
 	{
-		// Debug.Log("Fps: " + 1 / Time.deltaTime);
+		// Modifying vertex attributes
 		Mesh mesh = GetComponent<MeshFilter>().mesh;
 		Vector3[] vertices = mesh.vertices;
-		Vector3[] normals = mesh.normals;
 
-		for(int i = 0; i < vertices.Length; i++)
+
+		int iterator = 0;
+		for(int i = 0; i < width; i++)
 		{
-			vertices[i] += normals[i] * Mathf.Sin(Time.time); // just to test
+			for(int j = 0; j < height; j++)
+			{
+				for(int k = 0; k < depth; k++)
+				{
+					vertices[iterator] = point_mass[i, j, k].position;
+					point_mass_list[iterator] = point_mass[i, j, k];
+				}
+			}
+		}
+
+		// trying front face, k = 0;
+		iterator = 0;
+		for(int i = 0; i < width-1; i++)
+		{
+			for(int j = 0; j < height-1; j++)
+			{
+				new_triangles[iterator] = (i*width)+j;
+				new_triangles[iterator + 1] = (j*width)+i+width;
+				new_triangles[iterator + 2] = (j*width)+i+width+1; 
+				new_triangles[iterator + 3] = (j*width)+i;
+				new_triangles[iterator + 4] = (j*width)+i+width+1;
+				new_triangles[iterator + 5] = (j*width)+i+1;
+				iterator += 6;
+			}
 		}
 
 		mesh.vertices = vertices;
+		mesh.triangles = new_triangles;
+		mesh.RecalculateNormals();
 
 		for(int i = 0; i < width; i++)
 		{

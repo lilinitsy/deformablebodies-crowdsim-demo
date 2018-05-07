@@ -33,7 +33,7 @@ public class SoundDeformation2 : MonoBehaviour {
 		average_position = new Vector3(0, 0, 0);
 		new_vertices = new Vector3[width * height * depth];
 		new_uv = new Vector2[width * height * depth];
-		new_triangles = new int[width * height * depth * 3];
+		new_triangles = new int[width * height * depth * 6];
 
 		point_mass_list = new List<PointMass>();
 		point_mass = new PointMass[width, height, depth];
@@ -89,17 +89,20 @@ public class SoundDeformation2 : MonoBehaviour {
 
 		// trying front face, k = 0;
 		iterator = 0;
-		for(int i = 0; i < width; i++)
+		for(int i = 0; i < width-1; i++)
 		{
-			for(int j = 0; j < height; j++)
+			for(int j = 0; j < height-1; j++)
 			{
-				new_triangles[iterator] = i;
-				new_triangles[iterator + 1] = i + width;
-				new_triangles[iterator + 2] = i + width + 1; 
-				new_triangles[iterator + 3] = i;
-				new_triangles[iterator + 4] = i + width + 1;
-				new_triangles[iterator + 5] = i + 1;
-				iterator += 6;
+				for (int k = 0; k < depth; k++) 
+				{
+					new_triangles [iterator] = (k*width*height)+(j * width) + i;
+					new_triangles [iterator + 1] = (k*width*height)+(j * width) + i + width;
+					new_triangles [iterator + 2] = (k*width*height)+(j * width) + i + width + 1; 
+					new_triangles [iterator + 3] = (k*width*height)+(j * width) + i;
+					new_triangles [iterator + 4] = (k*width*height)+(j * width) + i + width + 1;
+					new_triangles [iterator + 5] = (k*width*height)+(j * width) + i + 1;
+					iterator += 6;
+				}
 			}
 		}
 
