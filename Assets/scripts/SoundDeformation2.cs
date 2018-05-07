@@ -11,7 +11,7 @@ public class SoundDeformation2 : MonoBehaviour {
 	public Vector3 average_position;
 	public Vector3[] new_vertices;
 	public Vector2[] new_uv;
-	public int[] new_triangles;
+	public int[] new_triangles; // ibo
 
 	public float rest_length;
 	public float dt;
@@ -33,12 +33,7 @@ public class SoundDeformation2 : MonoBehaviour {
 		average_position = new Vector3(0, 0, 0);
 		new_vertices = new Vector3[width * height * depth];
 		new_uv = new Vector2[width * height * depth];
-
-		Mesh mesh = new Mesh();
-		GetComponent<MeshFilter>().mesh = mesh;
-		mesh.vertices = new_vertices;
-		mesh.uv = new_uv; // not gonna fuck with textures for now
-		mesh.triangles = new_triangles;
+		new_triangles = new int[width * height * depth * 3];
 
 		point_mass_list = new List<PointMass>();
 		point_mass = new PointMass[width, height, depth];
@@ -49,10 +44,74 @@ public class SoundDeformation2 : MonoBehaviour {
 		frequency_groups = new float[8];
 
 		init();
+
+		int iterator = 0;
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height; j++)
+			{
+				for(int k = 0; k < depth; k++)
+				{
+					new_vertices[iterator] = point_mass[i, j, k].position;
+					iterator++;
+				}
+			}
+		}
+
+		Mesh mesh = new Mesh();
+		GetComponent<MeshFilter>().mesh = mesh;
+		mesh.Clear();
+		mesh.vertices = new_vertices;
+		mesh.uv = new_uv; // not gonna fuck with textures for now
+		mesh.triangles = new_triangles;
+
 	}
 
 	void Update() 
 	{
+		// Modifying vertex attributes
+		Mesh mesh = GetComponent<MeshFilter>().mesh;
+		Vector3[] vertices = mesh.vertices;
+		mesh.Clear();
+
+		int iterator = 0;
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height; j++)
+			{
+				for(int k = 0; k < depth; k++)
+				{
+					vertices[iterator] = point_mass[i, j, k].position;
+					point_mass_list[iterator] = point_mass[i, j, k];
+				}
+			}
+		}
+
+		// trying front face, k = 0;
+		iterator = 0;
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height; j++)
+			{
+				new_triangles[iterator] = i;
+				new_triangles[iterator + 1] = i + width;
+				new_triangles[iterator + 2] = i + width + 1; 
+				new_triangles[iterator + 3] = i;
+				new_triangles[iterator + 4] = i + width + 1;
+				new_triangles[iterator + 5] = i + 1;
+				iterator += 6;
+			}
+		}
+
+		mesh.vertices = vertices;
+		mesh.triangles = new_triangles;
+
+
+		for(int i = 0; i < vertices.Length; i++)
+		{
+			Debug.Log("Mesh vertices " + i + ": " + mesh.vertices[i].ToString("F4"));
+		}
+
 		for(int i = 0; i < width; i++)
 		{
 			for(int j = 0; j < height; j++)
@@ -70,16 +129,7 @@ public class SoundDeformation2 : MonoBehaviour {
 			// render_mesh();
 		}
 
-		Mesh mesh = GetComponent<MeshFilter>().mesh;
-		Vector3[] vertices = mesh.vertices;
-		Vector3[] normals = mesh.normals;
-		/*
-		for(int i = 0; i < vertices.Length; i++)
-		{
-			vertices[i] += normals[i] * Mathf.Sin(Time.time); // just to test
-		}
-		*/
-		int iterator = 0;
+		iterator = 0;
 		foreach(Transform child in transform)
 		{
 			vertices[iterator] = child.transform.position;
