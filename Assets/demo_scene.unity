@@ -132,7 +132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &235859716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +150,7 @@ MonoBehaviour:
   audio_source2: {fileID: 0}
   audio_source3: {fileID: 0}
   audio_source4: {fileID: 0}
+  mesh: {fileID: 0}
   position: {x: 0, y: 0, z: 0}
   average_position: {x: 0, y: 0, z: 0}
   new_vertices: []
@@ -239,6 +240,9 @@ MonoBehaviour:
   height: 6
   depth: 6
   max_time_update: 0.42
+  new_vertices: []
+  new_uv: []
+  new_triangles: 
   spectrum_samples: []
 --- !u!114 &235859721
 MonoBehaviour:
@@ -431,7 +435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1305472782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,6 +483,9 @@ MonoBehaviour:
   height: 6
   depth: 6
   max_time_update: 0
+  new_vertices: []
+  new_uv: []
+  new_triangles: 
   spectrum_samples: []
 --- !u!23 &1305472784
 MeshRenderer:
@@ -538,6 +545,7 @@ MonoBehaviour:
   audio_source2: {fileID: 0}
   audio_source3: {fileID: 0}
   audio_source4: {fileID: 0}
+  mesh: {fileID: 0}
   position: {x: 0, y: 0, z: 0}
   average_position: {x: 0, y: 0, z: 0}
   new_vertices: []

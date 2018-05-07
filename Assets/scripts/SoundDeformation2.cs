@@ -83,6 +83,7 @@ public class SoundDeformation2 : MonoBehaviour {
 				{
 					vertices[iterator] = point_mass[i, j, k].position;
 					point_mass_list[iterator] = point_mass[i, j, k];
+					iterator++;
 				}
 			}
 		}

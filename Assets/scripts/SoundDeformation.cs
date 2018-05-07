@@ -18,6 +18,10 @@ public class SoundDeformation : MonoBehaviour {
 	private float next_sound_update_time = 0;
 	private float average = 0;
 
+	public Vector3[] new_vertices;
+	public Vector2[] new_uv;
+	public int[] new_triangles; // ibo
+
 
 	public float[] spectrum_samples;
 	private float[] frequency_groups;
@@ -35,6 +39,9 @@ public class SoundDeformation : MonoBehaviour {
 	void Start() 
 	{
 
+		new_vertices = new Vector3[width * height * depth];
+		new_uv = new Vector2[width * height * depth];
+		new_triangles = new int[width * height * depth * 6];
 
 		point_mass_list = new List<PointMass>();
 		point_mass = new PointMass[width, height, depth];
@@ -49,11 +56,72 @@ public class SoundDeformation : MonoBehaviour {
 		mesh_filter = gameObject.GetComponent(typeof(MeshFilter)) as MeshFilter;
 
 		init();
+
+		int iterator = 0;
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height; j++)
+			{
+				for(int k = 0; k < depth; k++)
+				{
+					new_vertices[iterator] = point_mass[i, j, k].position;
+					iterator++;
+				}
+			}
+		}
+
+		Mesh mesh = new Mesh();
+		GetComponent<MeshFilter>().mesh = mesh;
+		mesh.Clear();
+		mesh.vertices = new_vertices;
+		mesh.uv = new_uv; // not gonna fuck with textures for now
+		mesh.triangles = new_triangles;
 	}
 
 
 	void Update() 
 	{
+		// Modifying vertex attributes
+		Mesh mesh = GetComponent<MeshFilter>().mesh;
+		Vector3[] vertices = mesh.vertices;
+		mesh.Clear();
+
+		int iterator = 0;
+		for(int i = 0; i < width; i++)
+		{
+			for(int j = 0; j < height; j++)
+			{
+				for(int k = 0; k < depth; k++)
+				{
+					vertices[iterator] = point_mass[i, j, k].position;
+					point_mass_list[iterator] = point_mass[i, j, k];
+					iterator++;
+				}
+			}
+		}
+
+		// trying front face, k = 0;
+		iterator = 0;
+		for(int i = 0; i < width-1; i++)
+		{
+			for(int j = 0; j < height-1; j++)
+			{
+				for (int k = 0; k < depth; k++) 
+				{
+					new_triangles [iterator] = (k*width*height)+(j * width) + i;
+					new_triangles [iterator + 1] = (k*width*height)+(j * width) + i + width;
+					new_triangles [iterator + 2] = (k*width*height)+(j * width) + i + width + 1; 
+					new_triangles [iterator + 3] = (k*width*height)+(j * width) + i;
+					new_triangles [iterator + 4] = (k*width*height)+(j * width) + i + width + 1;
+					new_triangles [iterator + 5] = (k*width*height)+(j * width) + i + 1;
+					iterator += 6;
+				}
+			}
+		}
+
+		mesh.vertices = vertices;
+		mesh.triangles = new_triangles;
+
 		audio_source.GetSpectrumData(spectrum_samples, 0, FFTWindow.Rectangular);
 		audio_source.transform.position = transform.position;
 
