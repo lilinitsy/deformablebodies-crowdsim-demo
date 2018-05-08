@@ -50,4 +50,19 @@ public class PlayerController : MonoBehaviour {
 			transform.Translate (0, 0, 2 * s);
 		}
 	}
+
+	void OnCollisionEnter(Collision other)
+	{
+		Debug.Log("I WONDER if I should DIE");
+
+
+		if(other.gameObject.name == "Projectile_AI(Clone)" ||
+			other.gameObject.name == "Agent(Clone)"||
+			other.gameObject.name.Contains("EarthSimple"))
+		{
+			Debug.Log("I Should DIE");
+			Destroy(gameObject);
+		}
+
+	}
 }

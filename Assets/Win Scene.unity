@@ -123,7 +123,6 @@ GameObject:
   - component: {fileID: 7668466}
   - component: {fileID: 7668465}
   - component: {fileID: 7668464}
-  - component: {fileID: 7668467}
   m_Layer: 0
   m_Name: EarthSimple5 (2)
   m_TagString: Untagged
@@ -169,20 +168,8 @@ Transform:
   - {fileID: 1220653619}
   - {fileID: 203413565}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &7668467
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 7668463}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &22375446
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +402,6 @@ GameObject:
   - component: {fileID: 40081874}
   - component: {fileID: 40081873}
   - component: {fileID: 40081872}
-  - component: {fileID: 40081875}
   m_Layer: 0
   m_Name: EarthSimple5 (4)
   m_TagString: Untagged
@@ -461,20 +447,8 @@ Transform:
   - {fileID: 595226638}
   - {fileID: 1948046435}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &40081875
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 40081871}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &40458360
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,7 +700,6 @@ GameObject:
   - component: {fileID: 142463030}
   - component: {fileID: 142463029}
   - component: {fileID: 142463028}
-  - component: {fileID: 142463032}
   m_Layer: 0
   m_Name: EarthSimple2 (3)
   m_TagString: Untagged
@@ -784,20 +757,8 @@ Transform:
   - {fileID: 1331875378}
   - {fileID: 1170635966}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &142463032
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 142463027}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &157769719
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,7 +874,6 @@ GameObject:
   - component: {fileID: 171712952}
   - component: {fileID: 171712951}
   - component: {fileID: 171712950}
-  - component: {fileID: 171712953}
   m_Layer: 0
   m_Name: EarthSimple3 (2)
   m_TagString: Untagged
@@ -959,20 +919,8 @@ Transform:
   - {fileID: 1715716763}
   - {fileID: 1069351266}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &171712953
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 171712949}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &174003161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,7 +1102,6 @@ GameObject:
   - component: {fileID: 194499207}
   - component: {fileID: 194499206}
   - component: {fileID: 194499205}
-  - component: {fileID: 194499208}
   m_Layer: 0
   m_Name: EarthSimple1
   m_TagString: Untagged
@@ -1200,20 +1147,8 @@ Transform:
   - {fileID: 508636171}
   - {fileID: 1376725961}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &194499208
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 194499204}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &203413564
 GameObject:
   m_ObjectHideFlags: 0
@@ -1718,7 +1653,6 @@ GameObject:
   - component: {fileID: 295353696}
   - component: {fileID: 295353695}
   - component: {fileID: 295353694}
-  - component: {fileID: 295353697}
   m_Layer: 0
   m_Name: EarthSimple5 (3)
   m_TagString: Untagged
@@ -1764,20 +1698,8 @@ Transform:
   - {fileID: 442521144}
   - {fileID: 2017420217}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &295353697
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 295353693}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &298735719
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,7 +1711,6 @@ GameObject:
   - component: {fileID: 298735722}
   - component: {fileID: 298735721}
   - component: {fileID: 298735720}
-  - component: {fileID: 298735724}
   m_Layer: 0
   m_Name: EarthSimple2 (1)
   m_TagString: Untagged
@@ -1847,20 +1768,8 @@ Transform:
   - {fileID: 1273138894}
   - {fileID: 174003162}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &298735724
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 298735719}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &308578765
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,7 +1780,6 @@ GameObject:
   - component: {fileID: 308578768}
   - component: {fileID: 308578767}
   - component: {fileID: 308578766}
-  - component: {fileID: 308578769}
   m_Layer: 0
   m_Name: EarthSimple4
   m_TagString: Untagged
@@ -1917,20 +1825,8 @@ Transform:
   - {fileID: 501122575}
   - {fileID: 1304240629}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &308578769
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 308578765}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &337334321
 GameObject:
   m_ObjectHideFlags: 0
@@ -2264,7 +2160,6 @@ GameObject:
   - component: {fileID: 423744611}
   - component: {fileID: 423744610}
   - component: {fileID: 423744609}
-  - component: {fileID: 423744612}
   m_Layer: 0
   m_Name: EarthSimple4 (3)
   m_TagString: Untagged
@@ -2310,20 +2205,8 @@ Transform:
   - {fileID: 2034856417}
   - {fileID: 1054466962}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &423744612
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 423744608}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &425742402
 GameObject:
   m_ObjectHideFlags: 0
@@ -2937,7 +2820,6 @@ GameObject:
   - component: {fileID: 478736356}
   - component: {fileID: 478736355}
   - component: {fileID: 478736354}
-  - component: {fileID: 478736357}
   m_Layer: 0
   m_Name: EarthSimple4 (4)
   m_TagString: Untagged
@@ -2983,20 +2865,8 @@ Transform:
   - {fileID: 540571425}
   - {fileID: 824668081}
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &478736357
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 478736353}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &481669439
 GameObject:
   m_ObjectHideFlags: 0
@@ -4099,8 +3969,6 @@ Transform:
   m_Children:
   - {fileID: 1558224296}
   - {fileID: 1915848496}
-  - {fileID: 2070021223}
-  - {fileID: 1763730727}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4114,7 +3982,6 @@ GameObject:
   - component: {fileID: 647480200}
   - component: {fileID: 647480199}
   - component: {fileID: 647480198}
-  - component: {fileID: 647480201}
   m_Layer: 0
   m_Name: EarthSimple1 (1)
   m_TagString: Untagged
@@ -4160,20 +4027,8 @@ Transform:
   - {fileID: 1051228259}
   - {fileID: 1679358185}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &647480201
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 647480197}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &660106959
 GameObject:
   m_ObjectHideFlags: 0
@@ -4597,7 +4452,6 @@ GameObject:
   - component: {fileID: 719902331}
   - component: {fileID: 719902330}
   - component: {fileID: 719902329}
-  - component: {fileID: 719902333}
   m_Layer: 0
   m_Name: EarthSimple2 (4)
   m_TagString: Untagged
@@ -4655,20 +4509,8 @@ Transform:
   - {fileID: 29637224}
   - {fileID: 497986361}
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &719902333
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 719902328}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &741950106
 GameObject:
   m_ObjectHideFlags: 0
@@ -4962,7 +4804,6 @@ GameObject:
   - component: {fileID: 795475819}
   - component: {fileID: 795475818}
   - component: {fileID: 795475817}
-  - component: {fileID: 795475820}
   m_Layer: 0
   m_Name: EarthSimple4 (1)
   m_TagString: Untagged
@@ -5008,20 +4849,8 @@ Transform:
   - {fileID: 1496080803}
   - {fileID: 40458361}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &795475820
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 795475816}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &799661691
 GameObject:
   m_ObjectHideFlags: 0
@@ -5491,7 +5320,6 @@ GameObject:
   - component: {fileID: 827789255}
   - component: {fileID: 827789254}
   - component: {fileID: 827789253}
-  - component: {fileID: 827789256}
   m_Layer: 0
   m_Name: EarthSimple3 (4)
   m_TagString: Untagged
@@ -5537,20 +5365,8 @@ Transform:
   - {fileID: 908745572}
   - {fileID: 1902087722}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &827789256
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 827789252}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &832725306
 GameObject:
   m_ObjectHideFlags: 0
@@ -5561,7 +5377,6 @@ GameObject:
   - component: {fileID: 832725309}
   - component: {fileID: 832725308}
   - component: {fileID: 832725307}
-  - component: {fileID: 832725310}
   m_Layer: 0
   m_Name: EarthSimple1 (2)
   m_TagString: Untagged
@@ -5607,20 +5422,8 @@ Transform:
   - {fileID: 1544324220}
   - {fileID: 1664979070}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &832725310
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 832725306}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &836825454
 GameObject:
   m_ObjectHideFlags: 0
@@ -5707,6 +5510,80 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 836825454}
   m_Mesh: {fileID: 4300000, guid: 814508e4800cf134da5d975ad6020589, type: 3}
+--- !u!1 &840187422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 840187423}
+  - component: {fileID: 840187425}
+  - component: {fileID: 840187424}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &840187423
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 840187422}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 982317526}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -28.185608, y: -88.7475}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &840187424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 840187422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Winner! Good job!
+--- !u!222 &840187425
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 840187422}
 --- !u!1 &875828655
 GameObject:
   m_ObjectHideFlags: 0
@@ -5866,7 +5743,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4192245908186484, guid: 06dfd25d33501f646832fd87725257b5, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4034140892305070, guid: 06dfd25d33501f646832fd87725257b5, type: 2}
       propertyPath: m_LocalRotation.x
@@ -6499,7 +6376,6 @@ GameObject:
   - component: {fileID: 961062595}
   - component: {fileID: 961062594}
   - component: {fileID: 961062593}
-  - component: {fileID: 961062596}
   m_Layer: 0
   m_Name: EarthSimple3
   m_TagString: Untagged
@@ -6545,20 +6421,8 @@ Transform:
   - {fileID: 355838393}
   - {fileID: 2111356477}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &961062596
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 961062592}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &968323316
 GameObject:
   m_ObjectHideFlags: 0
@@ -6569,7 +6433,6 @@ GameObject:
   - component: {fileID: 968323319}
   - component: {fileID: 968323318}
   - component: {fileID: 968323317}
-  - component: {fileID: 968323320}
   m_Layer: 0
   m_Name: EarthSimple3 (3)
   m_TagString: Untagged
@@ -6615,20 +6478,8 @@ Transform:
   - {fileID: 1915486935}
   - {fileID: 1975347176}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &968323320
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 968323316}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &970034611
 GameObject:
   m_ObjectHideFlags: 0
@@ -6639,7 +6490,6 @@ GameObject:
   - component: {fileID: 970034614}
   - component: {fileID: 970034613}
   - component: {fileID: 970034612}
-  - component: {fileID: 970034615}
   m_Layer: 0
   m_Name: EarthSimple3 (1)
   m_TagString: Untagged
@@ -6685,20 +6535,102 @@ Transform:
   - {fileID: 429470164}
   - {fileID: 946927670}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &970034615
-SphereCollider:
+--- !u!1 &982317525
+GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 970034611}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 982317526}
+  - component: {fileID: 982317529}
+  - component: {fileID: 982317528}
+  - component: {fileID: 982317527}
+  m_Layer: 5
+  m_Name: Canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &982317526
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 982317525}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 840187423}
+  m_Father: {fileID: 1915848496}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &982317527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 982317525}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &982317528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 982317525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!223 &982317529
+Canvas:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 982317525}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &988634414
 GameObject:
   m_ObjectHideFlags: 0
@@ -6709,7 +6641,6 @@ GameObject:
   - component: {fileID: 988634417}
   - component: {fileID: 988634416}
   - component: {fileID: 988634415}
-  - component: {fileID: 988634418}
   m_Layer: 0
   m_Name: EarthSimple4 (2)
   m_TagString: Untagged
@@ -6755,20 +6686,8 @@ Transform:
   - {fileID: 337334322}
   - {fileID: 184080858}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &988634418
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 988634414}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1007376823
 GameObject:
   m_ObjectHideFlags: 0
@@ -8475,6 +8394,68 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!1 &1386791674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1386791677}
+  - component: {fileID: 1386791676}
+  - component: {fileID: 1386791675}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1386791675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1386791674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &1386791676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1386791674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
+--- !u!4 &1386791677
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1386791674}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 30
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1388039651
 GameObject:
   m_ObjectHideFlags: 0
@@ -8590,7 +8571,6 @@ GameObject:
   - component: {fileID: 1404914178}
   - component: {fileID: 1404914177}
   - component: {fileID: 1404914176}
-  - component: {fileID: 1404914179}
   m_Layer: 0
   m_Name: EarthSimple5 (1)
   m_TagString: Untagged
@@ -8636,20 +8616,8 @@ Transform:
   - {fileID: 1555101147}
   - {fileID: 1697825568}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1404914179
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1404914175}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1424469674
 GameObject:
   m_ObjectHideFlags: 0
@@ -9062,7 +9030,6 @@ GameObject:
   - component: {fileID: 1482782077}
   - component: {fileID: 1482782076}
   - component: {fileID: 1482782075}
-  - component: {fileID: 1482782079}
   m_Layer: 0
   m_Name: EarthSimple2 (2)
   m_TagString: Untagged
@@ -9120,20 +9087,8 @@ Transform:
   - {fileID: 506582706}
   - {fileID: 875828656}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1482782079
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1482782074}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1490623322
 GameObject:
   m_ObjectHideFlags: 0
@@ -9453,7 +9408,6 @@ GameObject:
   - component: {fileID: 1499762319}
   - component: {fileID: 1499762318}
   - component: {fileID: 1499762317}
-  - component: {fileID: 1499762321}
   m_Layer: 0
   m_Name: EarthSimple2
   m_TagString: Untagged
@@ -9511,20 +9465,8 @@ Transform:
   - {fileID: 1774574394}
   - {fileID: 706223060}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1499762321
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1499762316}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1503440041
 GameObject:
   m_ObjectHideFlags: 0
@@ -11291,7 +11233,6 @@ GameObject:
   - component: {fileID: 1737934483}
   - component: {fileID: 1737934482}
   - component: {fileID: 1737934481}
-  - component: {fileID: 1737934484}
   m_Layer: 0
   m_Name: EarthSimple5
   m_TagString: Untagged
@@ -11337,20 +11278,8 @@ Transform:
   - {fileID: 1680950409}
   - {fileID: 1634920994}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1737934484
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1737934480}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1739422966
 GameObject:
   m_ObjectHideFlags: 0
@@ -11692,19 +11621,19 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 638791502}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4920
+      value: 246
       objectReference: {fileID: 0}
     - target: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -4180
+      value: -209
       objectReference: {fileID: 0}
     - target: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 2120
+      value: -594
       objectReference: {fileID: 0}
     - target: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}
       propertyPath: m_LocalRotation.x
@@ -11763,38 +11692,6 @@ Prefab:
       propertyPath: MaxDistance
       value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 82291845101552264, guid: 20d525d76d428e84dbc846a932ea1350,
-        type: 2}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114677362568518596, guid: 20d525d76d428e84dbc846a932ea1350,
-        type: 2}
-      propertyPath: width
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114677362568518596, guid: 20d525d76d428e84dbc846a932ea1350,
-        type: 2}
-      propertyPath: height
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114677362568518596, guid: 20d525d76d428e84dbc846a932ea1350,
-        type: 2}
-      propertyPath: depth
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}
   m_IsPrefabParent: 0
@@ -11814,11 +11711,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 175d615089fdfd4499f472fdd72eff90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1763730727 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350,
-    type: 2}
-  m_PrefabInternal: {fileID: 1763730717}
 --- !u!1 &1764851605
 GameObject:
   m_ObjectHideFlags: 0
@@ -11934,7 +11826,6 @@ GameObject:
   - component: {fileID: 1767613967}
   - component: {fileID: 1767613966}
   - component: {fileID: 1767613965}
-  - component: {fileID: 1767613968}
   m_Layer: 0
   m_Name: EarthSimple1 (4)
   m_TagString: Untagged
@@ -11980,20 +11871,8 @@ Transform:
   - {fileID: 1193625243}
   - {fileID: 1717861606}
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1767613968
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1767613964}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1774574393
 GameObject:
   m_ObjectHideFlags: 0
@@ -12258,7 +12137,6 @@ GameObject:
   - component: {fileID: 1815138606}
   - component: {fileID: 1815138605}
   - component: {fileID: 1815138604}
-  - component: {fileID: 1815138607}
   m_Layer: 0
   m_Name: EarthSimple1 (3)
   m_TagString: Untagged
@@ -12304,20 +12182,8 @@ Transform:
   - {fileID: 234731242}
   - {fileID: 583399434}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1815138607
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1815138603}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1823830461
 GameObject:
   m_ObjectHideFlags: 0
@@ -12830,6 +12696,7 @@ Transform:
   m_Children:
   - {fileID: 343663851}
   - {fileID: 1862143227}
+  - {fileID: 982317526}
   m_Father: {fileID: 638791502}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13408,11 +13275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 175d615089fdfd4499f472fdd72eff90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2070021223 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350,
-    type: 2}
-  m_PrefabInternal: {fileID: 2136482713}
 --- !u!1 &2074211183
 GameObject:
   m_ObjectHideFlags: 0
@@ -14113,19 +13975,19 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 638791502}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 12553.746
+      value: 627.6873
       objectReference: {fileID: 0}
     - target: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 6785.6875
+      value: 339.28436
       objectReference: {fileID: 0}
     - target: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -6282.8955
+      value: -1014.1448
       objectReference: {fileID: 0}
     - target: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}
       propertyPath: m_LocalRotation.x
@@ -14200,38 +14062,6 @@ Prefab:
         type: 2}
       propertyPath: MaxDistance
       value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 82291845101552264, guid: 20d525d76d428e84dbc846a932ea1350,
-        type: 2}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4795491231286882, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114677362568518596, guid: 20d525d76d428e84dbc846a932ea1350,
-        type: 2}
-      propertyPath: width
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114677362568518596, guid: 20d525d76d428e84dbc846a932ea1350,
-        type: 2}
-      propertyPath: height
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114677362568518596, guid: 20d525d76d428e84dbc846a932ea1350,
-        type: 2}
-      propertyPath: depth
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20d525d76d428e84dbc846a932ea1350, type: 2}

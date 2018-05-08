@@ -617,7 +617,6 @@ public class SoundDeformation : MonoBehaviour {
 		if(health <= 0)
 		{
 			Destroy(gameObject);
-			Destroy(other.gameObject);
 		}
 
 

@@ -16,7 +16,7 @@ public class AIBehaviour : MonoBehaviour
 	public float distance_between_agents;
 	public float starting_velocity;
 
-private float s = 0.1f;
+	private float s = 0.1f;
 	private float timeSinceShoot = 0.0f;
 	public Transform laser;
 	
@@ -47,18 +47,21 @@ private float s = 0.1f;
 
 	void Update()
 	{
+		check_for_game_loss();
+
 		average_position = Vector3.zero;
 		for(int i = 0; i < agents.Count; i++)
 		{
 			average_position += agents[i].transform.position;
 		}
-
+		average_position /= agents.Count;
 		
 		calculate_separation_force();
 		calculate_cohesion_force();
 		calculate_player_attraction_force();
 		calculate_obstacle_force();
 
+		
 		for(int i = 0; i < agents.Count; i++)
 		{
 			if(agents[i].rb.velocity.magnitude > 20.0f)
@@ -173,6 +176,17 @@ private float s = 0.1f;
 			transform.rotation = Quaternion.LookRotation(new_dir);
 		}
 
+	}
+
+	private void check_for_game_loss()
+	{
+		for(int i = 0; i < agents.Count; i++)
+		{
+			if(Vector3.Magnitude(player.transform.position - agents[i].transform.position) < 1.0f)
+			{
+				Destroy(player);
+			}
+		}
 	}
 
 	private bool can_see_player()
