@@ -15,15 +15,17 @@ public class SoundDeformation : MonoBehaviour {
 	public int depth; // z
 
 	public float max_time_update;
-	private float next_sound_update_time = 0;
-	private float average = 0;
 
 	public Vector3[] new_vertices;
 	public Vector2[] new_uv;
 	public int[] new_triangles; // ibo
-
-
 	public float[] spectrum_samples;
+
+
+	private int health = 10;
+	private float next_sound_update_time = 0;
+	private float average = 0;
+
 	private float[] frequency_groups;
 	private List<PointMass> point_mass_list;
 	private PointMass[ , , ] point_mass;
@@ -598,10 +600,26 @@ public class SoundDeformation : MonoBehaviour {
 		return f_group;
 	}
 
-	void OnCollisionEnter(Collision collision)
+	void OnCollisionEnter(Collision other)
 	{
-		if(collision.collider.name == "Projectile(Clone)") {
-			Destroy(gameObject);
+		Debug.Log("Collision enter");
+
+		if(other.gameObject.name == "Projectile(Clone)") 
+		{
+			health--;
 		}
+
+		if(other.gameObject.name == "Projectile_AI(Clone)") 
+		{
+			health--;
+		}
+
+		if(health <= 0)
+		{
+			Destroy(gameObject);
+			Destroy(other.gameObject);
+		}
+
+
 	}
 }

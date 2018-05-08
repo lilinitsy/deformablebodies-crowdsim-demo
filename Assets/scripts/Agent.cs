@@ -22,6 +22,8 @@ public class Agent : MonoBehaviour
 
     public Rigidbody rb; // do not intialize in inspector
 
+    private int health = 3;
+
     public void initialize()
     {
         vision_distance = 20;
@@ -70,4 +72,17 @@ public class Agent : MonoBehaviour
     {
 		transform.position += rb.velocity * Time.deltaTime;
 	}
+
+    void OnCollisionEnter(Collision collision)
+	{
+		if(collision.collider.name == "Projectile(Clone)") 
+		{
+			health--;
+		}
+
+        if(health <= 0)
+		{
+			Destroy(gameObject);
+		}
+    }
 }

@@ -26,9 +26,17 @@ public class LaserBehavior : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision)
 	{
-		Debug.Log (collision.collider.name);
-		if (collision.collider.name == "Jelly1") {
-			//Destroy(gameObject);
+		// Debug.Log (collision.collider.name);
+		if(collision.collider.name == "Jelly1") 
+		{
+			Debug.Log("Collided with jelly1");
+			Destroy(gameObject);
+		}
+
+		if(collision.collider.name == "Jelly2") 
+		{
+			Debug.Log("Collided with jelly2");
+			Destroy(gameObject);
 		}
 	}
 }

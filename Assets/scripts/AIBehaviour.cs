@@ -16,12 +16,10 @@ public class AIBehaviour : MonoBehaviour
 	public float distance_between_agents;
 	public float starting_velocity;
 
-
-	private float s = 0.1f;
+private float s = 0.1f;
 	private float timeSinceShoot = 0.0f;
 	public Transform laser;
-
-
+	
 	public GameObject player;
 	public GameObject home_base;
 	public GameObject enemy_base;
@@ -35,9 +33,9 @@ public class AIBehaviour : MonoBehaviour
 
 		for(int i = 0; i < number_agents_to_spawn; i++)
 		{
-			Vector3 agent_position = new Vector3(transform.position.x + distance_between_agents * Random.value,
-												transform.position.y + distance_between_agents * Random.value,
-												transform.position.z + distance_between_agents * Random.value);
+			Vector3 agent_position = new Vector3(transform.position.x + i * distance_between_agents * Random.value,
+												transform.position.y + i * distance_between_agents * Random.value,
+												transform.position.z + i * distance_between_agents * Random.value);
 			
 			Agent tmp_agent = Instantiate(agent_prefab, agent_position, Quaternion.identity) as Agent;
 			tmp_agent.transform.parent = transform;
@@ -60,9 +58,6 @@ public class AIBehaviour : MonoBehaviour
 		calculate_cohesion_force();
 		calculate_player_attraction_force();
 		calculate_obstacle_force();
-	
-		//fire_at_player();
-		//perform_rotations();
 
 		for(int i = 0; i < agents.Count; i++)
 		{
@@ -88,8 +83,8 @@ public class AIBehaviour : MonoBehaviour
 						float force = -1.0f * k_spring * (1.0f / distance_between_agents);
 						Vector3 unit_vec_i = Vector3.Normalize(agents[i].transform.position - average_position);
 						Vector3 unit_vec_j = Vector3.Normalize(agents[j].transform.position - average_position);
-						agents[i].rb.velocity += 8f * (force / agents[i].rb.mass) * unit_vec_i * Time.deltaTime * Time.deltaTime;
-						agents[j].rb.velocity -= 0.4f * (force / agents[j].rb.mass) * unit_vec_j * Time.deltaTime * Time.deltaTime;
+						agents[i].rb.velocity += 20f * (force / agents[i].rb.mass) * unit_vec_i * Time.deltaTime * Time.deltaTime;
+						agents[j].rb.velocity -= 20f * (force / agents[j].rb.mass) * unit_vec_j * Time.deltaTime * Time.deltaTime;
 					}
 				}
 			}
@@ -105,8 +100,8 @@ public class AIBehaviour : MonoBehaviour
 			{
 				float dist_agents_to_player = Vector3.Magnitude(agents[i].transform.position - player.transform.position);
 				float force = 1.0f * k_spring * (1.0f / dist_agents_to_player);
-				Vector3 unit_vec_i = Vector3.Normalize(player.transform.position - 1);
-				agents[i].rb.velocity += 20 * (force / agents[i].rb.mass) * unit_vec_i * Time.deltaTime;
+				Vector3 unit_vec_i = Vector3.Normalize(player.transform.position - agents[i].transform.position);
+				agents[i].rb.velocity += 100f * (force / agents[i].rb.mass) * unit_vec_i * Time.deltaTime;
 			}
 		}
 
@@ -117,7 +112,7 @@ public class AIBehaviour : MonoBehaviour
 				float dist_agents_to_enemy_base = Vector3.Magnitude(agents[i].transform.position - enemy_base.transform.position);
 				float force = 1.0f * k_spring * (1.0f / dist_agents_to_enemy_base);
 				Vector3 unit_vec_i = Vector3.Normalize(enemy_base.transform.position - agents[i].transform.position);
-				agents[i].rb.velocity += 14 * (force / agents[i].rb.mass) * unit_vec_i * Time.deltaTime;
+				agents[i].rb.velocity += 12 * (force / agents[i].rb.mass) * unit_vec_i * Time.deltaTime;
 			}
 		}
 		
@@ -142,6 +137,7 @@ public class AIBehaviour : MonoBehaviour
 	{
 
 	}
+
 
 	private void fire_at_player()
 	{
@@ -186,14 +182,14 @@ public class AIBehaviour : MonoBehaviour
 		for(int i = 0; i < agents.Count; i++)
 		{
 			if(!Physics.SphereCast(agents[i].transform.position, agent_radius,
-								(agents[i].transform.position).normalized,
+								(agents[i].transform.position - player.transform.position).normalized,
 								out hit))
 			{
-				Debug.Log("I CAN SEEEEEE");
+				//Debug.Log("I CAN SEEEEEE");
 				return true;
 			}
 		}
-		Debug.Log("i cannot see");
+		//Debug.Log("i cannot see");
 		return false;
 	}
 }
