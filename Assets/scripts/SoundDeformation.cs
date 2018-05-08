@@ -286,7 +286,6 @@ public class SoundDeformation : MonoBehaviour {
 											Quaternion.identity) as PointMass;
 					point_mass.transform.parent = transform;
 					point_mass.position = new Vector3(2 * i * rest_length, 2 * j * rest_length, 2 * k * rest_length); // + transform.position;
-					point_mass.to_string();
 					point_mass_list.Add(point_mass);
 				}
 			}

@@ -20,7 +20,7 @@ public class Agent : MonoBehaviour
     public float vision_distance;
     public float radius;
 
-    private Rigidbody rb;
+    public Rigidbody rb; // do not intialize in inspector
 
     public void initialize()
     {
@@ -62,12 +62,12 @@ public class Agent : MonoBehaviour
 	// Use this for initialization
 	void Start() 
     {
-		
+		rb = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	void Update() 
     {
-		
+		transform.position += rb.velocity * Time.deltaTime;
 	}
 }
