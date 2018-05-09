@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeformableBody : MonoBehaviour {
+
+// NOT used, despite the name
+public class DeformableBody : MonoBehaviour 
+{
 	public PointMass pointmass_prefab;
 
 	public AudioSource audio_source; // DO NOT attach an audiosource to the jelly; attach it here so I can get a distance

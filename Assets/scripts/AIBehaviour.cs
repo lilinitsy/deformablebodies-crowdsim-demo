@@ -26,6 +26,14 @@ public class AIBehaviour : MonoBehaviour
 
 	private Vector3 average_position;
 
+	public bool should_destroy = false;
+
+	bool should_time = false;
+	float timer = 0.0f;
+	public AudioSource source;
+
+	GameObject[] explosions;
+
 	void Start()
 	{
 		agents = new List<Agent>();
@@ -42,6 +50,15 @@ public class AIBehaviour : MonoBehaviour
 			tmp_agent.initialize(10000, agent_radius);
 			tmp_agent.rb.velocity = new Vector3(starting_velocity, starting_velocity, starting_velocity);
 			agents.Add(tmp_agent);
+		}
+
+
+		source.playOnAwake = false;
+
+		explosions = GameObject.FindGameObjectsWithTag("Explosion");
+		foreach(GameObject obj in explosions)
+		{
+			obj.SetActive(false);
 		}
 	}
 
@@ -68,6 +85,11 @@ public class AIBehaviour : MonoBehaviour
 			{
 				agents[i].rb.velocity = 20.0f * Vector3.Normalize(agents[i].rb.velocity);
 			}
+		}
+
+		if(should_time)
+		{
+			timer += Time.deltaTime;
 		}
 	}
 
@@ -184,7 +206,13 @@ public class AIBehaviour : MonoBehaviour
 		{
 			if(Vector3.Magnitude(player.transform.position - agents[i].transform.position) < 1.0f)
 			{
-				Destroy(player);
+				should_time = true;
+				source.Play();
+
+				foreach(GameObject obj in explosions)
+				{
+					obj.SetActive(true);
+				}
 			}
 		}
 	}

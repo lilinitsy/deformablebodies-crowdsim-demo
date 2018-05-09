@@ -2,10 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour 
+{
 	private float s = 0.1f;
 	private float timeSinceShoot = 0.0f;
 	public Transform laser;
+	GameObject[] explosions;
+	float timer = 0.0f;
+	bool should_time = false;
+
+	public AudioSource source;
+
+	void Start()
+	{
+		source.playOnAwake = false;
+
+		explosions = GameObject.FindGameObjectsWithTag("Explosion");
+		foreach(GameObject obj in explosions)
+		{
+			obj.SetActive(false);
+		}
+	}
+
 	void Update() {
 		//Input Movement
 		var x = Input.GetAxis("Vertical") * Time.deltaTime * 100.0f;
@@ -49,6 +67,20 @@ public class PlayerController : MonoBehaviour {
 			transform.Rotate (0, 10, 0);
 			transform.Translate (0, 0, 2 * s);
 		}
+
+		if(should_time)
+		{
+			timer += Time.deltaTime;
+		}
+		if(timer > 3.0f)
+		{
+			Destroy(gameObject);
+		}
+	}
+
+	private void check_for_game_loss()
+	{
+		
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -60,9 +92,13 @@ public class PlayerController : MonoBehaviour {
 			other.gameObject.name == "Agent(Clone)"||
 			other.gameObject.name.Contains("EarthSimple"))
 		{
+			source.Play();
 			Debug.Log("I Should DIE");
-			Destroy(gameObject);
+			should_time = true;
+			foreach(GameObject obj in explosions)
+			{
+				obj.SetActive(true);
+			}
 		}
-
 	}
 }

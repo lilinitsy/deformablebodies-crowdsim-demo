@@ -27,29 +27,16 @@ public class DynamicWeightingAStarSearch
 			if(current == goal)
 			{
 				GraphNode parent = fringe.parent[0];
-				Debug.Log("goal found, yay!");
-				Debug.Log("Goal position: " + goal.position.ToString("F4"));
-				Debug.Log("Parent of goal position: " + parent.position.ToString("F4"));
 				path.push(goal, parent, current_g, weight);
 				return reconstruct_path(path);
 			}
 
-			/*
-				If everything else has been explored,
-				and there is no path to goal,
-				maybe just use the best path AS LONG
-				as it doesn't end in the original node
-
-				If it does end in the original start node,
-				then use th	e next best
-			*/
 			if(explored.child.Count == graph.Count - 1)
 			{
-				Debug.Log("explored.child.Count was 1 less than graph size?");
-			//	if(path.child[path.child.Count - 1] != start)
-			//	{
+				if(path.child[path.child.Count - 1] != start)
+				{
 					path.push(fringe.child[0], fringe.parent[0], current_g, weight);
-			//	}
+				}
 			
 				return reconstruct_path(path);
 			}
@@ -72,13 +59,10 @@ public class DynamicWeightingAStarSearch
 					fringe.push(current.neighbours[i], current, g, weight);
 				}
 
-				Debug.Log("\t g: " + g + "\n\t current_g: " + current_g);
-
 				if(g < current_g)
 				{
 					if(path.node_in_queue(current.neighbours[i]))
 					{
-						Debug.Log("Parent swapping occurring");
 						path.swap_parent_of_child(current.neighbours[i], current);
 					}
 
@@ -90,8 +74,6 @@ public class DynamicWeightingAStarSearch
 			}
 		}
 
-		Debug.Log("Reached smth it shouldn't have");
-		// this shouldn't ever be reached
 		return reconstruct_path(path);
 	}
 
@@ -102,15 +84,6 @@ public class DynamicWeightingAStarSearch
 		for(int i = 0; i < path.child.Count; i++)
 		{
 			final_path.Add(path.child[i]);
-			//Debug.Log("Path child " + i);
-			//Debug.Log("\t" + path.child[i].position.ToString("F4"));
-		}
-
-	
-		for(int i = 0; i < final_path.Count; i++)
-		{
-			Debug.Log("Path child " + i);
-			Debug.Log("\t" + path.child[i].position.ToString("F4"));
 		}
 
 		// final_path is correct, but it isn't returning properly...

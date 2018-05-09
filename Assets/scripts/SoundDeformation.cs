@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundDeformation : MonoBehaviour {
+public class SoundDeformation : MonoBehaviour 
+{
 	public PointMass pointmass_prefab;	
 	public AudioSource audio_source; // DO NOT attach an audiosource to the jelly; attach it here so I can get a distance
 
@@ -102,8 +103,8 @@ public class SoundDeformation : MonoBehaviour {
 			}
 		}
 
-		// trying front face, k = 0;
-		iterator = 0;
+		// iterator = 0;
+		// this method doesn't work in 3D
 		/*for(int i = 0; i < width-1; i++)
 		{
 			for(int j = 0; j < height-1; j++)
@@ -124,6 +125,7 @@ public class SoundDeformation : MonoBehaviour {
 				iterator += 6;
 			}
 		}*/
+		iterator = 0;
 		for(int i = 0; i < width-1; i++)
 		{
 			for(int j = 0; j < height-1; j++)
@@ -268,6 +270,7 @@ public class SoundDeformation : MonoBehaviour {
 			}
 		}
 
+		Debug.Log("fps: " + 1.0f / Time.deltaTime);
 
 
 		//Debug.Log("Audio source local position: " + audio_source.transform.localPosition.ToString("F3"));

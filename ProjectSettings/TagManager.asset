@@ -8,6 +8,7 @@ TagManager:
   - SoundSource
   - Jelly
   - play
+  - Explosion
   layers:
   - Default
   - TransparentFX

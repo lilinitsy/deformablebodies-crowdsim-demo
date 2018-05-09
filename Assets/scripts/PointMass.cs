@@ -5,7 +5,6 @@ using UnityEngine;
 public class PointMass : MonoBehaviour 
 {
 	public Vector3 position;
-
 	public Rigidbody rb;
 
 	// Use this for initialization
